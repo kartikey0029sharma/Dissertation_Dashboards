@@ -1,0 +1,842 @@
+[
+ {
+  "n": 1,
+  "status": "VERIFIED",
+  "doi": "10.1177/1094428114547952",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "None. Authors (Herman Aguinis; Kyle J. Bradley), year 2014, title, journal Organizational Research Methods, vol. 17, issue 4, pp. 351-371 all match Crossref exactly.",
+  "verified_against": "https://api.crossref.org/works/10.1177/1094428114547952",
+  "crossref_query": "10.1177/1094428114547952"
+ },
+ {
+  "n": 2,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "news article",
+  "corrected_harvard": "",
+  "issue_found": "None. URL resolves. Headline 'ThoughtSpot automates full platform with new Spotter agents' matches verbatim; byline Eric Avidon (Senior News Writer); date on page '10 Dec 2025' matches '10 December'. Published on TechTarget (searchbusinessanalytics section, now branded 'Data Technologies'); citing the publisher as TechTarget is correct. Accessed date 29 August 2026 is consistent with the page still being live.",
+  "verified_against": "https://www.techtarget.com/searchbusinessanalytics/news/366636078/ThoughtSpot-automates-full-platform-with-new-Spotter-agents",
+  "crossref_query": "n/a - trade news, no DOI"
+ },
+ {
+  "n": 3,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "None - the citation is correct as written. Crossref has no record for Harvard Business Review (ISSN 0017-8012 returns 404 at the Crossref journals endpoint), so HBR 1998 has no DOI. Verified instead against two independent indexing databases: ERIC record EJ571355 gives 'Harvard Business Review, v76 n5 p76-87, Sep-Oct 1998', and PubMed PMID 10185433 gives '1998 Sep-Oct;76(5):76-87, 186'. Both confirm vol. 76, issue 5, pp. 76-87. NOTE for the marker: the freely circulating HBR reprint PDF (reprint no. 98501) shows printed page numbers 78-87 because pp. 76-77 are the opening title/illustration spread. The indexed first page is 76, so 'pp. 76-87' is the correct and standard citation - do not 'correct' it to 78-87.",
+  "verified_against": "https://eric.ed.gov/?id=EJ571355 and https://pubmed.ncbi.nlm.nih.gov/10185433/ (Crossref absence confirmed via https://api.crossref.org/journals/0017-8012 -> 404)",
+  "crossref_query": "https://api.crossref.org/journals/0017-8012 (404 - HBR not indexed)"
+ },
+ {
+  "n": 4,
+  "status": "VERIFIED",
+  "doi": "10.1177/0149206314527128",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "None. Authors (Neil Anderson; Kristina Potocnik; Jing Zhou), year 2014, full title, Journal of Management, vol. 40, issue 5, pp. 1297-1333 all match Crossref exactly.",
+  "verified_against": "https://api.crossref.org/works/10.1177/0149206314527128",
+  "crossref_query": "10.1177/0149206314527128"
+ },
+ {
+  "n": 5,
+  "status": "VERIFIED",
+  "doi": "10.1057/palgrave.jit.2000035",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "None. Authors (David Arnott; Graham Pervan), year 2005, title, Journal of Information Technology, vol. 20, issue 2, pp. 67-87 all match Crossref exactly. (Crossref lists the current publisher as SAGE; the DOI prefix is the original Palgrave one - this is normal and not an error.)",
+  "verified_against": "https://api.crossref.org/works/10.1057/palgrave.jit.2000035",
+  "crossref_query": "10.1057/palgrave.jit.2000035"
+ },
+ {
+  "n": 6,
+  "status": "VERIFIED",
+  "doi": "10.1027/1614-2241/a000014",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "None. Authors (Christiane Atzmuller; Peter M. Steiner), year 2010, title, journal Methodology, vol. 6, issue 3, pp. 128-138 all match Crossref exactly. Publisher Hogrefe.",
+  "verified_against": "https://api.crossref.org/works/10.1027/1614-2241/a000014",
+  "crossref_query": "10.1027/1614-2241/a000014"
+ },
+ {
+  "n": 7,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "regulator notice",
+  "corrected_harvard": "",
+  "issue_found": "None substantive. URL resolves; the page headline is 'Tax Administration fined for discriminatory and unlawful data processing' and the content matches (EUR 2.75 million fine on the Belastingdienst over nationality data in childcare benefit applications). The AP page itself carries no visible publication date, but the announcement was made on 8 December 2021 (corroborated by NL Times, 8 December 2021), so the year 2021 in the reference is correct. Place of publisher (The Hague) is correct - the Autoriteit Persoonsgegevens is based in Den Haag. Minor style point only: the reference renders the title in title case; the source page uses sentence case ('Tax Administration fined for discriminatory and unlawful data processing'). Matching the source's capitalisation would be marginally more faithful, but this is not a factual error.",
+  "verified_against": "https://www.autoriteitpersoonsgegevens.nl/en/current/tax-administration-fined-for-discriminatory-and-unlawful-data-processing (date corroborated by https://nltimes.nl/2021/12/08/tax-office-fined-eu275-million-privacy-violations-benefits-scandal)",
+  "crossref_query": "n/a - regulator enforcement notice, no DOI"
+ },
+ {
+  "n": 8,
+  "status": "VERIFIED",
+  "doi": "10.1109/TVCG.2022.3209448",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "None. All seven authors match in order (Bach, Freeman, Abdul-Rahman, Turkay, Khan, Fan, Chen); title, journal, vol. 29, issue 1, pp. 342-352, 2023 all confirmed. NOTE: the Crossref per-DOI record is stale - it still carries the IEEE early-access metadata (year 2022, pp. 1-11, no volume/issue). The version of record is 29(1), 342-352, January 2023, confirmed independently by dblp (TVCG vol. 29 issue listing) and the University of Edinburgh Research Explorer. The reference as written is correct; the Crossref record is the thing that is out of date.",
+  "verified_against": "https://api.crossref.org/works/10.1109/TVCG.2022.3209448 (early-access metadata), corrected/confirmed via https://dblp.org/db/journals/tvcg/tvcg29.html and https://www.research.ed.ac.uk/en/publications/dashboard-design-patterns/",
+  "crossref_query": "10.1109/TVCG.2022.3209448"
+ },
+ {
+  "n": 9,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "None. Confirmed against the Routledge catalogue page (ISBN 9780415454940, 'Classical Texts in Critical Realism' series, this edition published 2008) and against the book's own imprint page, which reads 'First published 2008 by Routledge, 2 Park Square, Milton Park, Abingdon, Oxon, OX14 4RN'. Place of publication 'Abingdon' is therefore supported by the imprint page, satisfying Cite Them Right. NOTE: the title page reads 'London and New York', so 'London: Routledge' is an equally defensible alternative; either is acceptable, but be consistent across the bibliography. Also note a separate Verso 2008 edition (Radical Thinkers, ISBN 9781844672042) exists - if the student read that one, the publisher would need changing to 'London: Verso'.",
+  "verified_against": "https://www.routledge.com/A-Realist-Theory-of-Science/Bhaskar/p/book/9780415454940 and the scanned imprint page at https://uberty.org/wp-content/uploads/2015/09/Roy_Bhaskar_A_Realist_Theory_of_Science.pdf",
+  "crossref_query": "n/a - monograph, no Crossref record"
+ },
+ {
+  "n": 10,
+  "status": "VERIFIED",
+  "doi": "10.3316/QRJ0902027",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "None. Author (Glenn A. Bowen), year 2009, title, Qualitative Research Journal, vol. 9, issue 2, pp. 27-40 all match Crossref exactly. (Crossref returns the DOI in lower case, 10.3316/qrj0902027; DOIs are case-insensitive, so this is not a discrepancy.)",
+  "verified_against": "https://api.crossref.org/works/10.3316/QRJ0902027",
+  "crossref_query": "10.3316/QRJ0902027"
+ },
+ {
+  "n": 11,
+  "status": "VERIFIED",
+  "doi": "10.1191/1478088706qp063oa",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "None. Authors (Virginia Braun; Victoria Clarke), year 2006, title, Qualitative Research in Psychology, vol. 3, issue 2, pp. 77-101 all match Crossref exactly.",
+  "verified_against": "https://api.crossref.org/works/10.1191/1478088706qp063oa",
+  "crossref_query": "10.1191/1478088706qp063oa"
+ },
+ {
+  "n": 12,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "None. Confirmed against the book's own title and copyright pages: 'Social Research Methods', Alan Bryman, 'Fifth edition', 'Oxford University Press, Great Clarendon Street, Oxford, OX2 6DP, United Kingdom', copyright Alan Bryman 2016. ISBN 9780199689453, published February 2016. Place of publication 'Oxford' is correct for Cite Them Right; edition statement '5th edn.' is correct.",
+  "verified_against": "Title/imprint pages of the 5th edition (https://ktpu.kpi.ua/wp-content/uploads/2014/02/social-research-methods-alan-bryman.pdf); ISBN 9780199689453 corroborated via AbeBooks/Biblio listings",
+  "crossref_query": "n/a - monograph, no Crossref record"
+ },
+ {
+  "n": 13,
+  "status": "VERIFIED",
+  "doi": "10.1145/3449287",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works?query.bibliographic=Bucinca+To+trust+or+to+think...), plus https://www.eecs.harvard.edu/~kgajos/papers/2021/bucinca21trust.pdf to confirm the article number 188 (Crossref records pages 1-21 rather than the article number)",
+  "crossref_query": "Bucinca To trust or to think cognitive forcing functions overreliance AI-assisted decision-making"
+ },
+ {
+  "n": 14,
+  "status": "VERIFIED",
+  "doi": "10.1002/bdm.2155",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref. Crossref's search index shows the 2019 online-first date, but the DOI record gives published-print 2020, Journal of Behavioral Decision Making 33(2), 220-239 - so the draft's 2020 is correct.",
+  "crossref_query": "systematic review of algorithm aversion in augmented decision making (query.author=Burton); confirmed via https://api.crossref.org/works/10.1002/bdm.2155"
+ },
+ {
+  "n": 15,
+  "status": "VERIFIED",
+  "doi": "10.2307/41703503",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref",
+  "crossref_query": "Business intelligence and analytics from big data to big impact Chen"
+ },
+ {
+  "n": 16,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "report",
+  "corrected_harvard": "",
+  "issue_found": "No error found. Two advisory notes only: (a) the CAA's own title renders the subtitle with a dash - 'Independent Review of NATS (En Route) Plc's Flight Planning System Failure on 28 August 2023 - Final Report' - where the draft uses a full stop; (b) 'London:' is a stylistic addition, as the report carries no printed place of publication and the CAA's head office is now Crawley, West Sussex. Cite Them Right's online-report pattern permits omitting the place when an Available at/Accessed pair is given.",
+  "verified_against": "https://www.caa.co.uk/CAP2993 - confirms CAP number CAP2993, exact title, issuing body UK Civil Aviation Authority, Final Report status, published 14 November 2024 (version 1 dated 25 November 2024). The URL in the reference resolves. Year 2024 correct.",
+  "crossref_query": ""
+ },
+ {
+  "n": 17,
+  "status": "VERIFIED",
+  "doi": "10.1080/01621459.1984.10478080",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1080/01621459.1984.10478080) - published-print 1984, Journal of the American Statistical Association 79(387), 531-554, authors Cleveland, W.S. and McGill, R.",
+  "crossref_query": "Graphical perception: theory, experimentation, and application to the development of graphical methods (query.author=Cleveland)"
+ },
+ {
+  "n": 18,
+  "status": "VERIFIED",
+  "doi": "10.1177/001316446002000104",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref",
+  "crossref_query": "A coefficient of agreement for nominal scales Cohen Educational and Psychological Measurement"
+ },
+ {
+  "n": 19,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://www.routledge.com/Statistical-Power-Analysis-for-the-Behavioral-Sciences/Cohen/p/book/9780805802832 (confirms Jacob Cohen, 2nd Edition, 1988, ISBN 9780805802832; Routledge is the successor imprint) and the Internet Archive catalogue record https://archive.org/metadata/statisticalpower0000cohe_j0l3 (confirms publisher 'L. Erlbaum Associates', place 'Hillsdale, N.J.', date 1988, same ISBN). Publisher, edition and place of publication in the draft are all correct.",
+  "crossref_query": ""
+ },
+ {
+  "n": 20,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "No error found. Advisory note only: SAGE's own catalogue pages give the 3rd edition's release as August 2017 (UK page states copyright year 2017; retailer records give 6 October 2017), whereas the printed book's copyright page and the near-universal citation convention give 2018. The draft's 2018 is retained as correct; flagging in case a marker cross-checks the SAGE store page.",
+  "verified_against": "https://www.sagepub.com/shop/buy-a-book/designing-and-conducting-mixed-methods-research-3-241842 and https://uk.sagepub.com/en-gb/eur/designing-and-conducting-mixed-methods-research/book241842 - confirm title, authors John W. Creswell and Vicki L. Plano Clark, Third Edition, publisher SAGE Publications Inc (Thousand Oaks, CA is SAGE US's stated place of publication), 520 pp., ISBNs 9781483344379 / 9781506394671.",
+  "crossref_query": ""
+ },
+ {
+  "n": 21,
+  "status": "VERIFIED",
+  "doi": "10.1037/xge0000033",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1037/xge0000033) - 2015, Journal of Experimental Psychology: General 144(1), 114-126, Dietvorst, B.J., Simmons, J.P., Massey, C.",
+  "crossref_query": "Algorithm aversion people erroneously avoid algorithms after seeing them err (query.author=Dietvorst)"
+ },
+ {
+  "n": 22,
+  "status": "VERIFIED",
+  "doi": "10.1126/sciadv.adn5290",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1126/sciadv.adn5290) - 2024, Science Advances 10(28), article eadn5290, Doshi, A.R. and Hauser, O.P.",
+  "crossref_query": "Generative AI enhances individual creativity but reduces the collective diversity of novel content Doshi Hauser"
+ },
+ {
+  "n": 23,
+  "status": "VERIFIED",
+  "doi": "10.2307/258557",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.2307/258557) - Eisenhardt, K.M., 'Building Theories from Case Study Research', The Academy of Management Review, 14(4), 1989, first page 532. Crossref's JSTOR deposit records only the first page; the range 532-550 as given in the draft is correct. The publisher-side DOI 10.5465/amr.1989.4308385 could not be retrieved (Crossref returned HTTP 429 repeatedly), so the verified JSTOR DOI is reported instead.",
+  "crossref_query": "Eisenhardt Building Theories from Case Study Research Academy of Management Review 1989 volume 14"
+ },
+ {
+  "n": 24,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.accinf.2008.03.001",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1016/j.accinf.2008.03.001) - 2008, International Journal of Accounting Information Systems 9(3), 135-153, Elbashir, M.Z., Collier, P.A., Davern, M.J.",
+  "crossref_query": "Measuring the effects of business intelligence systems the relationship between business process and organizational performance Elbashir"
+ },
+ {
+  "n": 25,
+  "status": "VERIFIED",
+  "doi": "10.1086/517897",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1086/517897)",
+  "crossref_query": "Rankings and reactivity how public measures recreate social worlds Espeland"
+ },
+ {
+  "n": 26,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "WorldCat OCLC 1015821231 (https://search.worldcat.org/title/Discovering-statistics-using-IBM-SPSS-statistics/oclc/1015821231) - confirms Field, Andy; Fifth edition; SAGE Publications; London; 2018. Monograph, no Crossref DOI. Publisher may be given more fully as 'SAGE Publications' but 'SAGE' is acceptable.",
+  "crossref_query": "Discovering Statistics Using IBM SPSS Statistics Field"
+ },
+ {
+  "n": 27,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "regulator notice",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://www.fca.org.uk/publication/final-notices/goldman-sachs-international-2019.pdf - the URL in the reference resolves to the genuine FCA FINAL NOTICE addressed to Goldman Sachs International, dated 27 March 2019, firm reference number 142888, penalty GBP 34,344,700. Year, issuing body and URL in the draft all match.",
+  "crossref_query": "Financial Conduct Authority Final Notice Goldman Sachs International 2019"
+ },
+ {
+  "n": 28,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "regulator notice",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://www.fca.org.uk/publication/final-notices/tsb-bank-plc-2022.pdf - the URL in the reference resolves to the genuine FCA FINAL NOTICE addressed to TSB Bank plc, dated 20 December 2022, firm reference number 191240, penalty GBP 29.75 million (Proteo4UK IT migration; Principles 2 and 3). Year, issuing body and URL in the draft all match.",
+  "crossref_query": "Financial Conduct Authority Final Notice TSB Bank plc 2022"
+ },
+ {
+  "n": 29,
+  "status": "VERIFIED",
+  "doi": "10.1111/ijmr.12183",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1111/ijmr.12183)",
+  "crossref_query": "Reviewing and theorizing the unintended consequences of performance management systems Franco-Santos"
+ },
+ {
+  "n": 30,
+  "status": "VERIFIED",
+  "doi": "10.1136/amiajnl-2011-000089",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1136/amiajnl-2011-000089)",
+  "crossref_query": "Automation bias a systematic review of frequency effect mediators and mitigators Goddard"
+ },
+ {
+  "n": 31,
+  "status": "VERIFIED",
+  "doi": "10.1177/1525822X05279903",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1177/1525822X05279903) - Crossref stores this as title 'How Many Interviews Are Enough?' plus subtitle 'An Experiment with Data Saturation and Variability'; combined it matches the draft exactly.",
+  "crossref_query": "How many interviews are enough An experiment with data saturation and variability Guest Bunce Johnson"
+ },
+ {
+  "n": 32,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.jbusres.2016.08.004",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1016/j.jbusres.2016.08.004) - all seven authors match in order. Crossref records issue 'C', an Elsevier internal marker; Journal of Business Research vol. 70 carries no true issue number, so the draft is right to omit one.",
+  "crossref_query": "Big data and predictive analytics for supply chain and organizational performance Gunasekaran"
+ },
+ {
+  "n": 33,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.jbusres.2016.08.007",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1016/j.jbusres.2016.08.007)",
+  "crossref_query": "Factors influencing big data decision-making quality Janssen van der Voort Wahyudi"
+ },
+ {
+  "n": 34,
+  "status": "VERIFIED",
+  "doi": "10.1108/IJOPM-02-2015-0078",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.1108/IJOPM-02-2015-0078)",
+  "crossref_query": "Challenges and opportunities of digital information at the intersection of big data analytics and supply chain management Kache Seuring"
+ },
+ {
+  "n": 35,
+  "status": "CORRECTED",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "Kahneman, D. (2011) Thinking, Fast and Slow. London: Allen Lane.",
+  "issue_found": "Publisher/year mismatch. The book's own copyright page records: 'First published in the United States of America by Farrar, Straus and Giroux 2011', 'First published in Great Britain by Allen Lane 2011', 'Published in Penguin Books 2012'. The draft pairs the 2011 date with the Penguin imprint, which did not publish it until 2012. Use either 'Kahneman, D. (2011) Thinking, Fast and Slow. London: Allen Lane.' or, if the Penguin paperback was the copy actually consulted, 'Kahneman, D. (2012) Thinking, Fast and Slow. London: Penguin.' Do not mix the 2011 date with Penguin.",
+  "verified_against": "Publisher copyright page: https://cdn.penguin.co.uk/dam-assets/books/9780141033570/9780141033570-sample.pdf; corroborated by Open Library https://openlibrary.org/books/OL25416865M/Thinking_fast_and_slow (Allen Lane, London, 2011, ISBN 9781846140556). Trade monograph, no Crossref DOI.",
+  "crossref_query": "Thinking Fast and Slow Kahneman"
+ },
+ {
+  "n": 36,
+  "status": "VERIFIED",
+  "doi": "10.5465/annals.2018.0174",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (https://api.crossref.org/works/10.5465/annals.2018.0174)",
+  "crossref_query": "Algorithms at work the new contested terrain of control Kellogg Valentine Christin"
+ },
+ {
+  "n": 37,
+  "status": "VERIFIED",
+  "doi": "10.4135/9781071878781",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref (DOI 10.4135/9781071878781, monograph, 'Content Analysis: An Introduction to Its Methodology', Klaus Krippendorff, SAGE Publications, Inc.; Crossref's year is 2019, which is the SAGE Knowledge e-edition deposit) plus the publisher's own page https://www.sagepub.com/shop/buy-a-book/content-analysis-4-258450 (redirected from us.sagepub.com/en-us/nam/content-analysis/book258450), which states Fourth Edition, Sage US, publication date May 2018 \u2014 confirming the draft's 2018. Note: place of publication was not read off the title page; Thousand Oaks, CA is SAGE Publications Inc.'s registered address and is the form in common use, though the 4th edition title page lists Los Angeles first. Either is defensible; no change made.",
+  "crossref_query": "query.title=Content Analysis An Introduction to Its Methodology & query.author=Krippendorff"
+ },
+ {
+  "n": 38,
+  "status": "VERIFIED",
+  "doi": "10.2307/2529310",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref: 'The Measurement of Observer Agreement for Categorical Data', Biometrics, vol. 33, issue 1, 1977, J. Richard Landis and Gary G. Koch. Crossref's page field records only the first page ('159') because the JSTOR deposit carries first-page-only; the draft's full range 159-174 is correct and matches the published article. Confirmed a second time via the direct DOI record https://api.crossref.org/works/10.2307/2529310.",
+  "crossref_query": "Landis Koch The measurement of observer agreement for categorical data Biometrics"
+ },
+ {
+  "n": 39,
+  "status": "VERIFIED",
+  "doi": "10.1287/orsc.2021.1549",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref: 'To Engage or Not to Engage with AI for Critical Judgments: How Professionals Deal with Opacity When Using AI for Medical Diagnosis', Organization Science, vol. 33, issue 1, pp. 126-148, 2022, S. Lebovitz, H. Lifshitz-Assaf, N. Levina. Author list, year, volume, issue and page range all match the draft.",
+  "crossref_query": "Lebovitz To engage or not to engage with AI for critical judgments Organization Science"
+ },
+ {
+  "n": 40,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Open Library catalogue record https://openlibrary.org/books/OL2863384M/Naturalistic_inquiry \u2014 'Naturalistic inquiry', Yvonna S. Lincoln and Egon G. Guba, Sage Publications, Beverly Hills, California, 1985, 416pp, ISBN 0803924313 / 9780803924314. Corroborated by a contemporaneous review indexed at journals.sagepub.com/doi/10.1177/144078338702300329, whose header reads 'NATURALISTIC INQUIRY. Yvonna S. Lincoln and Egon G. Guba. Beverly Hills, Sage Publications, 1985. 416pp.' Author, year, title, place and publisher in the draft are all correct. Caveat: the Crossref query for this item was attempted three times and never completed (two HTTP 429 rate-limit rejections, then a WebFetch session limit), so 'not indexed by Crossref' is an inference from it being a 1985 pre-DOI monograph rather than a confirmed negative result.",
+  "crossref_query": "query.title=Naturalistic Inquiry & query.author=Lincoln Guba (attempted 3x; blocked by rate limiting and session limit)"
+ },
+ {
+  "n": 41,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.obhdp.2018.12.005",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref: 'Algorithm appreciation: People prefer algorithmic to human judgment', Organizational Behavior and Human Decision Processes, vol. 151, pp. 90-103, 2019, J.M. Logg, J.A. Minson, D.A. Moore. Crossref records no issue number for this volume, so the draft is right to omit one. (A 2017 SSRN preprint of the same paper exists at 10.2139/ssrn.2941774; the draft correctly cites the journal version.)",
+  "crossref_query": "Algorithm appreciation People prefer algorithmic to human judgment Logg"
+ },
+ {
+  "n": 42,
+  "status": "VERIFIED",
+  "doi": "10.1093/jamia/ocw105",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref: 'Automation bias and verification complexity: a systematic review', Journal of the American Medical Informatics Association, vol. 24, issue 2, pp. 423-431, David Lyell and Enrico Coiera. The direct DOI record https://api.crossref.org/works/10.1093/jamia/ocw105 gives published-print 2017-03-01 and published-online 2016-08-11; the draft's 2017 is the correct print-issue year (Crossref's summary 'issued' year of 2016 is the online-first date, not the citable issue year).",
+  "crossref_query": "query.title=Automation bias and verification complexity a systematic review & query.author=Lyell"
+ },
+ {
+  "n": 43,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.techfore.2021.121390",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref: 'What influences algorithmic decision-making? A systematic literature review on algorithm aversion', Technological Forecasting and Social Change, vol. 175, article 121390, 2022, Hasan Mahmud, A.K.M. Najmul Islam, Syed Ishtiaque Ahmed, Kari Smolander. All four author surnames and initials, year, volume and article number match the draft; Crossref records no issue number, consistent with the draft.",
+  "crossref_query": "query.title=What influences algorithmic decision-making A systematic literature review on algorithm aversion & query.author=Mahmud"
+ },
+ {
+  "n": 44,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "report",
+  "corrected_harvard": "Market Research Society (2019) MRS Code of Conduct. London: Market Research Society. Available at: https://www.mrs.org.uk/pdf/MRS-Code-of-Conduct-2019.pdf (Accessed: 31 August 2026).",
+  "issue_found": "No bibliographic error: author, year, title and publisher are all correct. The only shortfall is a Cite Them Right completeness point \u2014 the code was consulted online, and Cite Them Right Harvard requires the URL and an access date for an online organisational document. The draft gives neither. Substitute your own actual access date in the corrected entry.",
+  "verified_against": "The MRS's own PDF at https://www.mrs.org.uk/pdf/MRS-Code-of-Conduct-2019.pdf, which is headed 'Code of Conduct', dated October 2019, issued by The Market Research Society, and states 'This edition of the Code of Conduct was agreed by MRS to be operative from 1 October 2019 ... a fully revised version of a self-regulatory Code first adopted on 5 November 1954.' MRS is London-based, so 'London: Market Research Society' is correct. Note a later revision of the Code exists, so keep the 2019 date only if that is the edition actually used.",
+  "crossref_query": "not queried \u2014 self-regulatory professional code, grey literature not indexed by Crossref"
+ },
+ {
+  "n": 45,
+  "status": "CORRECTED",
+  "doi": "",
+  "type": "vendor documentation",
+  "corrected_harvard": "Microsoft (2025) Endorse Fabric and Power BI items. Available at: https://learn.microsoft.com/en-us/fabric/fundamentals/endorsement-promote-certify (Accessed: 29 August 2026).",
+  "issue_found": "Three problems. (1) YEAR IS WRONG and this is the material one: the draft dates the page 2026, but the live Microsoft Learn article displays a last-updated date of 26 January 2025, and the docs source front matter shows ms.date 07/11/2024. Nothing on or behind the page supports 2026. Corrected to 2025, the date the page itself displays. (2) Title capitalisation: the page title is 'Endorse Fabric and Power BI items' with a lower-case 'items', not 'Items'. (3) 'Redmond, WA: Microsoft' treats a web page as if it were a book; Cite Them Right Harvard does not use a place of publication for a web page, so it has been dropped. The URL is correct and the page does exist, and the 29 August 2026 access date is plausible.",
+  "verified_against": "The URL given in the reference itself, https://learn.microsoft.com/en-us/fabric/fundamentals/endorsement-promote-certify \u2014 page exists, titled 'Endorse Fabric and Power BI items - Microsoft Fabric | Microsoft Learn', covering promotion, certification and master data endorsement, showing last updated 2025-01-26. Cross-checked against the public docs source at https://raw.githubusercontent.com/MicrosoftDocs/fabric-docs/main/docs/fundamentals/endorsement-promote-certify.md, whose front matter gives title 'Endorse Fabric and Power BI items' and ms.date 07/11/2024. The two dates disagree with each other but both rule out 2026.",
+  "crossref_query": "not queried \u2014 vendor documentation; Microsoft Learn pages are not indexed by Crossref"
+ },
+ {
+  "n": 46,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.im.2021.103434",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref: 'Artificial intelligence capability: Conceptualization, measurement calibration, and empirical study on its impact on organizational creativity and firm performance', Information & Management, vol. 58, issue 3, article 103434, 2021, Patrick Mikalef and Manjul Gupta. Author names, year, journal, volume, issue and article number all match the draft.",
+  "crossref_query": "query.title=Artificial intelligence capability conceptualization measurement calibration & query.author=Mikalef"
+ },
+ {
+  "n": 47,
+  "status": "VERIFIED",
+  "doi": "10.1207/s15327108ijap0801_3",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref: 'Automation Bias: Decision Making and Performance in High-Tech Cockpits', The International Journal of Aviation Psychology, vol. 8, issue 1, pp. 47-63, 1998, Kathleen L. Mosier, Linda J. Skitka, Susan Heers, Mark Burdick. All four authors, year, journal title, volume, issue and page range match the draft. (A 2017 reprint as a book chapter in 'Decision Making in Aviation', 10.4324/9781315095080-16, pp. 271-288, also exists; the draft correctly cites the original journal article.)",
+  "crossref_query": "query.title=Automation bias decision making and performance in high-tech cockpits & query.author=Mosier"
+ },
+ {
+  "n": 48,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.bushor.2020.01.006",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref: 'Assessing data quality: A managerial call to action', Business Horizons, vol. 63, issue 3, pp. 325-337, 2020, Tadhg Nagle, Tom Redman, David Sammon. Author surnames, year, journal, volume, issue and page range all match the draft.",
+  "crossref_query": "query.title=Assessing data quality a managerial call to action & query.author=Nagle"
+ },
+ {
+  "n": 49,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "report",
+  "corrected_harvard": "",
+  "issue_found": "No error. Publisher page confirms the Office for Statistics Regulation as author, the exact title 'Ensuring statistical models command public confidence' with subtitle 'Learning lessons from the approach to developing models for awarding grades in the UK in 2020', and publication on 2 March 2021. OSR is the regulatory arm of the UK Statistics Authority and is London-based, so 'London: UK Statistics Authority' is sound. Optionally add the exact date (2 March 2021) for precision.",
+  "verified_against": "https://osr.statisticsauthority.gov.uk/publication/ensuring-statistical-models-command-public-confidence/",
+  "crossref_query": "not applicable - OSR report, not indexed in Crossref; verified on publisher page"
+ },
+ {
+  "n": 50,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "regulator notice",
+  "corrected_harvard": "",
+  "issue_found": "No error. OCC page confirms headline 'OCC Assesses $400 Million Civil Money Penalty Against Citibank', release number NR 2020-132, issued 7 October 2020, and the $400 million civil money penalty for deficiencies in enterprise-wide risk management, compliance risk management, data governance and internal controls. Release number and figure both check out.",
+  "verified_against": "https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-132.html",
+  "crossref_query": "not applicable - OCC news release, not indexed in Crossref; verified on issuing regulator's page"
+ },
+ {
+  "n": 51,
+  "status": "VERIFIED",
+  "doi": "10.1177/0018720810376055",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1177/0018720810376055",
+  "crossref_query": "10.1177/0018720810376055"
+ },
+ {
+  "n": 52,
+  "status": "VERIFIED",
+  "doi": "10.1518/001872097778543886",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1518/001872097778543886",
+  "crossref_query": "10.1518/001872097778543886"
+ },
+ {
+  "n": 53,
+  "status": "VERIFIED",
+  "doi": "10.1177/1094670509344213",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1177/1094670509344213",
+  "crossref_query": "10.1177/1094670509344213"
+ },
+ {
+  "n": 54,
+  "status": "VERIFIED",
+  "doi": "10.1145/505248.506010",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1145/505248.506010",
+  "crossref_query": "10.1145/505248.506010"
+ },
+ {
+  "n": 55,
+  "status": "VERIFIED",
+  "doi": "10.1037/0021-9010.88.5.879",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1037/0021-9010.88.5.879",
+  "crossref_query": "10.1037/0021-9010.88.5.879"
+ },
+ {
+  "n": 56,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "report",
+  "corrected_harvard": "Post Office Horizon IT Inquiry (2025) Volume 1 of the Post Office Horizon IT Inquiry's Final Report (HC 1119). London: Post Office Horizon IT Inquiry. Available at: https://www.postofficehorizoninquiry.org.uk/volume-1-post-office-horizon-it-inquirys-final-report (Accessed: 18 August 2026).",
+  "issue_found": "All stated fields are correct: Volume 1 was published 8 July 2025, so the (2025) date is right, and the title matches the Inquiry's own wording. Two improvements rather than errors: (a) the 'Available at' URL is the Inquiry's site root, so a marker following it lands on a homepage rather than the report - the direct report page is better; (b) the report is House of Commons paper HC 1119 (ordered to be printed 8 July 2025, ISBN 978-1-5286-5867-6), and adding the HC number strengthens the entry. Confirmed that only Volume 1 has been published to date - the Inquiry's reports page carries a Progress Update from Sir Wyn Williams dated 8 July 2026 on the remainder of the final report - so citing 'Volume 1' rather than the whole final report is the correct and defensible choice.",
+  "verified_against": "https://www.postofficehorizoninquiry.org.uk/volume-1-post-office-horizon-it-inquirys-final-report and the report PDF https://www.postofficehorizoninquiry.org.uk/sites/default/files/2025-07/Post%20Office%20Horizon%20IT%20Inquiry%20Final%20Report%20Volume%201_0.pdf and https://www.postofficehorizoninquiry.org.uk/reports-and-statements",
+  "crossref_query": "not applicable - public inquiry report, not indexed in Crossref; verified against the Inquiry's own site and the published PDF front matter"
+ },
+ {
+  "n": 57,
+  "status": "VERIFIED",
+  "doi": "10.1145/269012.269025",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1145/269012.269025",
+  "crossref_query": "10.1145/269012.269025"
+ },
+ {
+  "n": 58,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "report",
+  "corrected_harvard": "",
+  "issue_found": "No error; entry is defensible as written. Confirmed against the report's own front matter: title page reads 'Royal Commission into the Robodebt Scheme Report', Commissioner Catherine Holmes AC SC, letter of transmittal to the Governor-General dated 7 July 2023, copyright 'Commonwealth of Australia 2023', ISBN 978-1-921241-58-1 (online) / 978-1-921241-59-8 (print). Two points to be aware of: the imprint page names NO city - 'Canberra' is a supplied place, which is the standard convention for Commonwealth of Australia publications (the only location printed is Queensland, for the printer SNAP Underwood, which is not the publisher); and the report runs to three volumes plus a separate sealed chapter, so if the dissertation cites a specific passage the volume number should be given.",
+  "verified_against": "Report front matter via https://www.monash.edu/__data/assets/pdf_file/0007/3365503/report_of-the-royal-commission-into-the-robodebt-scheme.pdf ; corroborated at https://en.wikipedia.org/wiki/Royal_Commission_into_the_Robodebt_Scheme and https://www.royalcommission.gov.au/robodebt (the cited page https://robodebt.royalcommission.gov.au/publications/report blocks automated fetch via robots.txt but is live)",
+  "crossref_query": "not applicable - royal commission report, not indexed in Crossref; verified against the published report's title and imprint pages"
+ },
+ {
+  "n": 59,
+  "status": "VERIFIED",
+  "doi": "10.1080/10400419.2012.650092",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1080/10400419.2012.650092",
+  "crossref_query": "10.1080/10400419.2012.650092"
+ },
+ {
+  "n": 60,
+  "status": "VERIFIED",
+  "doi": "10.1145/3411764.3445518",
+  "type": "conference paper",
+  "corrected_harvard": "",
+  "issue_found": "Article number 39 is correct. Crossref itself carries no article-number field for this record (it gives page '1-15'), so the number was confirmed independently from DBLP, whose pages field is '39:1-39:15' (record conf/chi/SambasivanKHAPA21). All authors, order, initials, proceedings title, publisher and year match. Optionally add 'pp. 1-15' or 'article 39, 15 pages' and the DOI. Conference was CHI '21, 8-13 May 2021, Yokohama, Japan.",
+  "verified_against": "https://api.crossref.org/works/10.1145/3411764.3445518 (authors, title, proceedings, publisher, year) and https://dblp.org/rec/conf/chi/SambasivanKHAPA21.html (article number)",
+  "crossref_query": "10.1145/3411764.3445518"
+ },
+ {
+  "n": 61,
+  "status": "VERIFIED",
+  "doi": "10.1109/TVCG.2018.2864903",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref",
+  "crossref_query": "query.author=Sarikaya&query.title=What+do+we+talk+about+when+we+talk+about+dashboards"
+ },
+ {
+  "n": 62,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "Saunders, M.N.K., Lewis, P. and Thornhill, A. (2019) Research Methods for Business Students. 8th edn. Harlow: Pearson Education.",
+  "issue_found": "Substantively correct: 8th edn, 2019, Harlow, Pearson all confirmed (872 pp.). Only refinement is the lead author's initials - the title page reads 'Mark N. K. Saunders', so Cite Them Right expects 'Saunders, M.N.K.' rather than 'Saunders, M.'. Note that Pearson's own product page for ISBN 9781292208800 shows 2020, which is the eText/bundle release; the print 8th edition is May 2019 (ISBN 9781292208787), so the draft's 2019 is right.",
+  "verified_against": "https://research.birmingham.ac.uk/en/publications/research-methods-for-business-students-2/ and https://www.pearson.com/en-gb/subject-catalog/p/research-methods-for-business-students/P200000005358/9781292208800",
+  "crossref_query": "not run - textbook, not indexed in Crossref"
+ },
+ {
+  "n": 63,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "regulator notice",
+  "corrected_harvard": "U.S. Securities and Exchange Commission (2013) In the Matter of Knight Capital Americas LLC. Administrative Proceeding File No. 3-15570, Release No. 34-70694, 16 October. Washington, DC: U.S. Securities and Exchange Commission. Available at: https://www.sec.gov/files/litigation/admin/2013/34-70694.pdf (Accessed: 18 August 2026).",
+  "issue_found": "All substantive details in the draft are correct - the order exists at the URL given, the caption is 'In the Matter of Knight Capital Americas LLC', and the release number 34-70694 is right. Two optional improvements: name the corporate author 'U.S. Securities and Exchange Commission' (to distinguish it from other national SECs) and add the Administrative Proceeding File No. 3-15570 and the order date of 16 October 2013, both of which appear on the document.",
+  "verified_against": "https://www.sec.gov/files/litigation/admin/2013/34-70694.pdf",
+  "crossref_query": "not run - SEC administrative order, not indexed in Crossref"
+ },
+ {
+  "n": 64,
+  "status": "VERIFIED",
+  "doi": "10.1111/isj.12101",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref",
+  "crossref_query": "How does business analytics contribute to business value Seddon"
+ },
+ {
+  "n": 65,
+  "status": "VERIFIED",
+  "doi": "10.1111/isj.12071",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref",
+  "crossref_query": "query.author=Shollo+Galliers&query.title=business+intelligence+systems+organisational+knowing"
+ },
+ {
+  "n": 66,
+  "status": "VERIFIED",
+  "doi": "10.1177/0008125619862257",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref",
+  "crossref_query": "query.author=Shrestha&query.title=Organizational+decision-making+structures+in+the+age+of+artificial+intelligence"
+ },
+ {
+  "n": 67,
+  "status": "VERIFIED",
+  "doi": "10.2307/1884852",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Oxford Academic (https://academic.oup.com/qje/article-abstract/69/1/99/1919737) and RePEc/IDEAS (https://ideas.repec.org/a/oup/qjecon/v69y1955i1p99-118..html), both confirming QJE 69(1), pp. 99-118, 1955, DOI 10.2307/1884852. The Crossref call itself could not be completed - the WebFetch session quota was exhausted before the final query returned.",
+  "crossref_query": "Simon A Behavioral Model of Rational Choice Quarterly Journal of Economics 1955"
+ },
+ {
+  "n": 68,
+  "status": "VERIFIED",
+  "doi": "10.1006/ijhc.1999.0252",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref",
+  "crossref_query": "query.author=Skitka+Mosier+Burdick&query.title=Does+automation+bias+decision-making"
+ },
+ {
+  "n": 69,
+  "status": "VERIFIED",
+  "doi": "10.1145/253769.253804",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Crossref",
+  "crossref_query": "Data quality in context Strong Lee Wang Communications of the ACM"
+ },
+ {
+  "n": 70,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "vendor documentation",
+  "corrected_harvard": "Tableau (no date) Set a Data Quality Warning. Available at: https://help.tableau.com/current/online/en-us/dm_dqw.htm (Accessed: 29 August 2026).",
+  "issue_found": "The page is live and the title is exactly 'Set a Data Quality Warning' (applies to Tableau Cloud, Tableau Data Management and Tableau Server). Two formatting points under Cite Them Right: (a) the page carries no publication date and the URL is the rolling '/current/' path, so '(2026)' is not supported by the source - '(no date)' with the access date is the compliant form; (b) place of publication and publisher ('Seattle, WA: Tableau Software') are not used for web pages in Cite Them Right and should be dropped. If your in-text citations depend on a year, keep (2026) consistently but be aware a marker may query it.",
+  "verified_against": "https://help.tableau.com/current/online/en-us/dm_dqw.htm",
+  "crossref_query": "not run - vendor help page, not indexed in Crossref"
+ },
+ {
+  "n": 71,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "SAGE catalogue (https://us.sagepub.com/en-us/nam/sage-handbook-of-mixed-methods-in-social-behavioral-research/book233405) and SAGE Research Methods 2nd-edition record (https://methods.sagepub.com/hnbk/edvol/sage-handbook-of-mixed-methods-social-behavioral-research-2e/toc); editors, 2nd edn, 2010, Thousand Oaks, CA and SAGE all confirmed.",
+  "crossref_query": "not run - edited handbook, verified against publisher records"
+ },
+ {
+  "n": 72,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "vendor documentation",
+  "corrected_harvard": "ThoughtSpot (no date) Verify Liveboards. ThoughtSpot Cloud documentation, version 26.8.0.cl. Available at: https://docs.thoughtspot.com/cloud/26.8.0.cl/liveboard-verify.html (Accessed: 29 August 2026).",
+  "issue_found": "The page is live and the heading is exactly 'Verify Liveboards' at documentation version 26.8.0.cl. Three points: (a) the canonical URL ends '.html' - https://docs.thoughtspot.com/cloud/26.8.0.cl/liveboard-verify.html - so use that form; (b) the page carries no publication date, so Cite Them Right prefers '(no date)' over '(2026)', though the versioned URL gives '2026a' more support than the Tableau case; (c) place of publication and publisher ('Mountain View, CA: ThoughtSpot') are not used for web pages. Retain the 'a' suffix only if a second ThoughtSpot 2026 source is cited elsewhere.",
+  "verified_against": "https://docs.thoughtspot.com/cloud/26.8.0.cl/liveboard-verify",
+  "crossref_query": "not run - vendor documentation page, not indexed in Crossref"
+ },
+ {
+  "n": 73,
+  "status": "CORRECTED",
+  "doi": "",
+  "type": "vendor documentation",
+  "corrected_harvard": "ThoughtSpot (2026b) dbt data freshness. Mountain View, CA: ThoughtSpot. Available at: https://docs.thoughtspot.com/cloud/26.3.0.cl/analyst-studio-dbt-data-freshness (Accessed: 29 August 2026).",
+  "issue_found": "TITLE WRONG. The page exists and resolves, but its title is 'dbt data freshness' (H1 on the page; HTML <title> is 'dbt data freshness :: ThoughtSpot Documentation'), not 'dbt Data Freshness in Analyst Studio'. 'Analyst Studio' is the product the page sits under (URL slug analyst-studio-dbt-data-freshness; breadcrumb 'Data Engineers > Integrate with dbt'), not part of the title. DATE IS CORRECT: the page carries no publication or last-updated date, but the cited documentation version 26.3.0.cl is ThoughtSpot Cloud's March 2026 release (release-notes page headed 'March 2026 release notes', https://docs.thoughtspot.com/cloud/26.6.0.cl/26-3-0-cl), so (2026) is right for this versioned URL. Unlike the mis-dated Microsoft sibling page, nothing here points to 2025. Place of publication Mountain View, CA confirmed as ThoughtSpot, Inc.'s headquarters. Note the same page also exists under earlier doc versions (e.g. 10.15.0.cl, December 2025), so the year depends entirely on the version cited - keep the 26.3.0.cl URL if 2026 is to stand.",
+  "verified_against": "https://docs.thoughtspot.com/cloud/26.3.0.cl/analyst-studio-dbt-data-freshness (page title and content); https://docs.thoughtspot.com/cloud/26.6.0.cl/26-3-0-cl (26.3.0.cl = March 2026 release); https://archive-docs-thoughtspot-com.vercel.app/cloud/26.4.0.cl/analyst-studio-dbt-data-freshness (rendered H1 'dbt data freshness')",
+  "crossref_query": "not applicable - vendor documentation, not indexed in Crossref"
+ },
+ {
+  "n": 74,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.dss.2016.09.019",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1016/j.dss.2016.09.019 - author Van-Hau Trieu; 'Getting value from Business Intelligence systems: A review and research agenda'; Decision Support Systems; vol. 93; pp. 111-124; 2017. Journal carries no issue number for this volume, matching the reference.",
+  "crossref_query": "https://api.crossref.org/works/10.1016/j.dss.2016.09.019"
+ },
+ {
+  "n": 75,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/ (publisher's own page: '1983 / 2nd Edition 2001', Graphics Press LLC, Cheshire, CT); https://openlibrary.org/books/OL3966475M/The_Visual_Display_of_Quantitative_Information (2nd ed., Graphics Press, 'Cheshire, Conn', 2001; ISBN 0961392142 / 9780961392147). Edition, year, publisher and place of publication all confirmed.",
+  "crossref_query": "not applicable - book, not indexed in Crossref"
+ },
+ {
+  "n": 76,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "report",
+  "corrected_harvard": "",
+  "issue_found": "Correct as written. Optional improvement only: as an online-only report, Cite Them Right would also want the URL and access date, e.g. '... Washington, DC: US House of Representatives. Available at: https://democrats-transportation.house.gov/imo/media/doc/final_boeing_737_max_report1.pdf (Accessed: <date>).' The report cover gives the month as September 2020; the committee released it on 16 September 2020.",
+  "verified_against": "https://democrats-transportation.house.gov/imo/media/doc/final_boeing_737_max_report1.pdf - cover page reads 'FINAL COMMITTEE REPORT / THE DESIGN, DEVELOPMENT & CERTIFICATION OF THE BOEING 737 MAX / SEPTEMBER 2020', prepared by the majority staff of the Committee on Transportation and Infrastructure for Chair Peter A. DeFazio and Aviation Subcommittee Chair Rick Larsen; release confirmed 16 September 2020 at https://democrats-transportation.house.gov/news/press-releases/after-18-month-investigation-chairs-defazio-and-larsen-release-final-committee-report-on-boeing-737-max",
+  "crossref_query": "not applicable - US congressional committee report, not indexed in Crossref"
+ },
+ {
+  "n": 77,
+  "status": "VERIFIED",
+  "doi": "10.1145/3579605",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1145/3579605 - Helena Vasconcelos, Matthew Jorke, Madeleine Grunde-McLaughlin, Tobias Gerstenberg, Michael S. Bernstein, Ranjay Krishna; Proceedings of the ACM on Human-Computer Interaction; vol. 7, issue CSCW1; 2023. Article number confirmed from the published PDF running head: 'Proc. ACM Hum.-Comput. Interact., Vol. 7, No. CSCW1, Article 129. Publication date: April 2023.' (https://cicl.stanford.edu/papers/vasconcelos2023explanations.pdf)",
+  "crossref_query": "https://api.crossref.org/works/10.1145/3579605"
+ },
+ {
+  "n": 78,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.jbusres.2016.08.009",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1016/j.jbusres.2016.08.009 - Journal of Business Research, vol. 70, pp. 356-365, 2017. Crossref records the first author as given 'Samuel Fosso' / family 'Wamba', so 'Wamba, S.F.' is the correct form; remaining authors Gunasekaran, Akter, Ren (Steven Ji-fan), Dubey, Childe all match. Crossref shows issue 'C', an Elsevier internal designation, so omitting the issue is correct.",
+  "crossref_query": "https://api.crossref.org/works/10.1016/j.jbusres.2016.08.009"
+ },
+ {
+  "n": 79,
+  "status": "VERIFIED",
+  "doi": "10.1080/07421222.1996.11518099",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1080/07421222.1996.11518099 - Richard Y. Wang and Diane M. Strong, 'Beyond Accuracy: What Data Quality Means to Data Consumers', Journal of Management Information Systems, vol. 12, issue 4, pp. 5-33, 1996.",
+  "crossref_query": "https://api.crossref.org/works/10.1080/07421222.1996.11518099"
+ },
+ {
+  "n": 80,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Copyright page of the 3rd edition: 'Morgan Kaufmann is an imprint of Elsevier, 225 Wyman Street, Waltham, MA 02451, USA', copyright 2013, 'Third Edition', ISBN 978-0-12-381464-7 (https://vdoc.pub/documents/information-visualization-third-edition-perception-for-design-1e90p43i336o). Elsevier deposits the 3rd edition's chapters in Crossref with a 2013 publication year (https://api.crossref.org/works?filter=isbn:9780123814647). Edition, year, publisher and place of publication all correct. Note: Elsevier's shop page lists the release date as 21 May 2012, but the book itself carries a 2013 copyright and Elsevier's own metadata says 2013, so 2013 is the right year to cite.",
+  "crossref_query": "https://api.crossref.org/works?filter=isbn:9780123814647 (individual chapters indexed; the book as a whole has no Crossref record)"
+ },
+ {
+  "n": 81,
+  "status": "VERIFIED",
+  "doi": "10.2307/258761",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.5465/amr.1993.3997517 - resolves to the canonical Crossref record DOI 10.2307/258761: Richard W. Woodman, John E. Sawyer, Ricky W. Griffin, 'Toward a Theory of Organizational Creativity', The Academy of Management Review, vol. 18, issue 2, first page 293, 1993, publisher Academy of Management. Crossref stores only the first page; the full range 293-321 is confirmed by the JSTOR/AMR record and multiple independent citations. Both 10.5465/amr.1993.3997517 (AOM) and 10.2307/258761 (JSTOR) point to this article.",
+  "crossref_query": "https://api.crossref.org/works/10.5465/amr.1993.3997517"
+ },
+ {
+  "n": 82,
+  "status": "VERIFIED",
+  "doi": "10.1016/j.accinf.2011.08.002",
+  "type": "journal article",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "https://api.crossref.org/works/10.1016/j.accinf.2011.08.002 - Ogan M. Yigitbasioglu and Oana Velcu, 'A review of dashboards in performance management: Implications for design and research', International Journal of Accounting Information Systems, vol. 13, issue 1, pp. 41-59, 2012. DOI located via https://eprints.qut.edu.au/46072/",
+  "crossref_query": "https://api.crossref.org/works/10.1016/j.accinf.2011.08.002"
+ },
+ {
+  "n": 83,
+  "status": "NOT_IN_CROSSREF",
+  "doi": "",
+  "type": "book",
+  "corrected_harvard": "",
+  "issue_found": "",
+  "verified_against": "Copyright page of the 6th edition: 'SAGE Publications, Inc., 2455 Teller Road, Thousand Oaks, California 91320', copyright 2018, 'Sixth Edition', title 'Case Study Research and Applications: Design and Methods' by Robert K. Yin (https://ebooks.umu.ac.ug/librarian/books-file/Case%20Study%20Research%20and%20Applications.pdf). Edition, year, publisher and place all correct. Note: some library catalogues record the imprint as 'Los Angeles : SAGE, [2018]' (e.g. https://cmc.marmot.org/Record/.b5928917x) because SAGE's title page lists Los Angeles first among its offices; 'Thousand Oaks, CA' matches the copyright-page address and is the form used by most citations of this edition, so it is defensible as written.",
+  "crossref_query": "not applicable - book, not indexed in Crossref"
+ },
+ {
+  "n": 84,
+  "status": "CORRECTED",
+  "doi": "",
+  "type": "report",
+  "corrected_harvard": "Zillow Group (2021) Q3 2021 Shareholder Letter, 2 November 2021. Seattle, WA: Zillow Group. Exhibit 99.3 to Form 8-K filed with the US Securities and Exchange Commission. Available at: https://www.sec.gov/Archives/edgar/data/1617640/000161764021000085/exhibit993.htm (Accessed: 18 August 2026).",
+  "issue_found": "WRONG URL, and the title should be adjusted. The cited URL (.../q32021991.htm) resolves, but it is Exhibit 99.1 of the 8-K - the earnings press release headed 'Zillow Group Reports Third-Quarter 2021 Financial Results & Shares Plan to Wind Down Zillow Offers Operations' - NOT the shareholder letter. In the same filing, Exhibit 99.2 (.../q32021992.htm) is 'Reported Consolidated Results'. The shareholder letter is Exhibit 99.3, at .../exhibit993.htm, which opens 'Q3 2021 Shareholder Letter / November 2, 2021 / Dear Shareholders:'. The document's own title is 'Q3 2021 Shareholder Letter', not 'Third Quarter 2021 Shareholder Letter'. Filing confirmed as Form 8-K, Zillow Group, Inc. (CIK 0001617640), accession 0001617640-21-000085, filed 2 November 2021. Year 2021 and place Seattle, WA are correct. A marker following the cited link would land on the press release, not the shareholder letter, so this must be fixed.",
+  "verified_against": "https://www.sec.gov/Archives/edgar/data/1617640/000161764021000085/0001617640-21-000085-index.htm (8-K index, filed 2 November 2021); https://www.sec.gov/Archives/edgar/data/1617640/000161764021000085/q32021991.htm (Exhibit 99.1 press release - the URL as cited); https://www.sec.gov/Archives/edgar/data/1617640/000161764021000085/exhibit993.htm (Exhibit 99.3 - the actual Q3 2021 Shareholder Letter)",
+  "crossref_query": "not applicable - SEC filing exhibit, not indexed in Crossref"
+ }
+]

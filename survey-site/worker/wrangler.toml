@@ -1,0 +1,28 @@
+name = "dashboard-study"
+main = "src/worker.js"
+compatibility_date = "2026-08-01"
+
+# The D1 database. Create it FIRST, with the EU jurisdiction, because a
+# jurisdiction can only be set at creation and never added afterwards:
+#
+#   npx wrangler d1 create dashboard-study --location=weur
+#
+# Then paste the database_id it prints into the line below.
+[[d1_databases]]
+binding = "DB"
+database_name = "dashboard-study"
+database_id = "PASTE-THE-DATABASE-ID-HERE"
+
+[vars]
+# The origin allowed to call this Worker from a browser. Lock it to the Pages
+# site rather than leaving it as "*", so a copy of the instrument hosted
+# somewhere else cannot post into your dataset.
+ALLOWED_ORIGIN = "https://kartikey0029sharma.github.io"
+
+# ADMIN_KEY is NOT set here, because this file is committed to a public
+# repository. Set it as an encrypted secret instead, once:
+#
+#   npx wrangler secret put ADMIN_KEY
+#
+# Wrangler prompts for the value and stores it encrypted. It never appears in
+# the repository, in the dashboard, or in any log.

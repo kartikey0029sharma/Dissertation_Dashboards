@@ -1,0 +1,1334 @@
+{
+ "raw_participants": 147,
+ "raw_observations": 1176,
+ "excl_attention": 14,
+ "excl_speeding": 0,
+ "excl_short_total": 0,
+ "excluded_total": 14,
+ "excl_rate_pct": 9.5,
+ "N": 133,
+ "obs": 1064,
+ "median_page_seconds": 75.0,
+ "median_total_minutes": 17.1,
+ "iqr_page_seconds": [
+  53.75,
+  102.25
+ ],
+ "over_reliance_overall": 0.28,
+ "accuracy_overall": 0.408,
+ "or_hidden": 0.368,
+ "or_visible": 0.192,
+ "or_auditable": 0.329,
+ "or_own": 0.231,
+ "acc_hidden": 0.325,
+ "acc_visible": 0.491,
+ "acc_auditable": 0.338,
+ "acc_own": 0.477,
+ "cells": {
+  "visible_own": {
+   "over_reliance": 0.147,
+   "accuracy": 0.575,
+   "n": 266,
+   "confidence": 5.2
+  },
+  "visible_auditable": {
+   "over_reliance": 0.237,
+   "accuracy": 0.406,
+   "n": 266,
+   "confidence": 5.05
+  },
+  "hidden_own": {
+   "over_reliance": 0.316,
+   "accuracy": 0.38,
+   "n": 266,
+   "confidence": 5.42
+  },
+  "hidden_auditable": {
+   "over_reliance": 0.421,
+   "accuracy": 0.271,
+   "n": 266,
+   "confidence": 5.39
+  }
+ },
+ "choice_dist": {
+  "correct": 0.408,
+  "dashboard": 0.28,
+  "partial": 0.218,
+  "other": 0.094
+ },
+ "choice_by_signal": {
+  "hidden": {
+   "dashboard": 0.368,
+   "correct": 0.325,
+   "partial": 0.203,
+   "other": 0.103
+  },
+  "visible": {
+   "correct": 0.491,
+   "partial": 0.233,
+   "dashboard": 0.192,
+   "other": 0.085
+  }
+ },
+ "verify_hidden": 0.556,
+ "verify_visible": 0.727,
+ "conf_hidden": 5.41,
+ "conf_visible": 5.12,
+ "conf_overreliant": 5.35,
+ "conf_not": 5.23,
+ "stakes_mean": 5.91,
+ "stakes_sd": 0.87,
+ "by_scenario": {
+  "fraud": {
+   "over_reliance": 0.263,
+   "n": 133,
+   "sector": "Financial services"
+  },
+  "freight": {
+   "over_reliance": 0.421,
+   "n": 133,
+   "sector": "Logistics"
+  },
+  "kiln": {
+   "over_reliance": 0.218,
+   "n": 133,
+   "sector": "Industrial"
+  },
+  "kovai": {
+   "over_reliance": 0.331,
+   "n": 133,
+   "sector": "Retail"
+  },
+  "pricing": {
+   "over_reliance": 0.301,
+   "n": 133,
+   "sector": "Consumer goods"
+  },
+  "retention": {
+   "over_reliance": 0.323,
+   "n": 133,
+   "sector": "Technology"
+  },
+  "supplier": {
+   "over_reliance": 0.233,
+   "n": 133,
+   "sector": "Manufacturing"
+  },
+  "ward": {
+   "over_reliance": 0.15,
+   "n": 133,
+   "sector": "Healthcare"
+  }
+ },
+ "model_primary": {
+  "Intercept": {
+   "b": -1.7614,
+   "se": 0.1741,
+   "or": 0.172,
+   "lo": 0.122,
+   "hi": 0.242,
+   "z": -10.119,
+   "p": 4.5611614992583444e-24
+  },
+  "hidden": {
+   "b": 0.9882,
+   "se": 0.2134,
+   "or": 2.686,
+   "lo": 1.768,
+   "hi": 4.082,
+   "z": 4.63,
+   "p": 3.662557107268325e-06
+  },
+  "auditable": {
+   "b": 0.5913,
+   "se": 0.2056,
+   "or": 1.806,
+   "lo": 1.207,
+   "hi": 2.703,
+   "z": 2.877,
+   "p": 0.004019973520062326
+  },
+  "hidden:auditable": {
+   "b": -0.1366,
+   "se": 0.2816,
+   "or": 0.872,
+   "lo": 0.502,
+   "hi": 1.515,
+   "z": -0.485,
+   "p": 0.6276543548324615
+  }
+ },
+ "icc_alpha": 0.129,
+ "model_adjusted": {
+  "Intercept": {
+   "b": -1.9924,
+   "se": 0.287,
+   "or": 0.136,
+   "lo": 0.078,
+   "hi": 0.239,
+   "z": -6.943,
+   "p": 3.844481886590556e-12
+  },
+  "hidden": {
+   "b": 1.0475,
+   "se": 0.2085,
+   "or": 2.85,
+   "lo": 1.894,
+   "hi": 4.289,
+   "z": 5.024,
+   "p": 5.058803904904526e-07
+  },
+  "auditable": {
+   "b": 0.688,
+   "se": 0.2022,
+   "or": 1.99,
+   "lo": 1.339,
+   "hi": 2.958,
+   "z": 3.402,
+   "p": 0.0006690478216878571
+  },
+  "hidden:auditable": {
+   "b": -0.1581,
+   "se": 0.2785,
+   "or": 0.854,
+   "lo": 0.495,
+   "hi": 1.474,
+   "z": -0.568,
+   "p": 0.5702342109356846
+  },
+  "stakes_c": {
+   "b": -0.0422,
+   "se": 0.0877,
+   "or": 0.959,
+   "lo": 0.807,
+   "hi": 1.139,
+   "z": -0.481,
+   "p": 0.6307213020816289
+  },
+  "exp_c": {
+   "b": -0.1019,
+   "se": 0.1128,
+   "or": 0.903,
+   "lo": 0.724,
+   "hi": 1.127,
+   "z": -0.904,
+   "p": 0.36620753756941327
+  },
+  "senior": {
+   "b": -0.1006,
+   "se": 0.2995,
+   "or": 0.904,
+   "lo": 0.503,
+   "hi": 1.626,
+   "z": -0.336,
+   "p": 0.7368883663855452
+  },
+  "daily": {
+   "b": 0.0663,
+   "se": 0.2072,
+   "or": 1.069,
+   "lo": 0.712,
+   "hi": 1.604,
+   "z": 0.32,
+   "p": 0.7488373142424253
+  }
+ },
+ "model_adjusted_scenario_ps": {
+  "C(scenario)[T.freight]": 0.0003,
+  "C(scenario)[T.kiln]": 0.5692,
+  "C(scenario)[T.kovai]": 0.2143,
+  "C(scenario)[T.pricing]": 0.219,
+  "C(scenario)[T.retention]": 0.2147,
+  "C(scenario)[T.supplier]": 0.8182,
+  "C(scenario)[T.ward]": 0.0109
+ },
+ "model_accuracy": {
+  "Intercept": {
+   "b": 0.3031,
+   "se": 0.1259,
+   "or": 1.354,
+   "lo": 1.058,
+   "hi": 1.733,
+   "z": 2.407,
+   "p": 0.01610528152086254
+  },
+  "hidden": {
+   "b": -0.7939,
+   "se": 0.1659,
+   "or": 0.452,
+   "lo": 0.327,
+   "hi": 0.626,
+   "z": -4.786,
+   "p": 1.7002840360732831e-06
+  },
+  "auditable": {
+   "b": -0.6835,
+   "se": 0.1724,
+   "or": 0.505,
+   "lo": 0.36,
+   "hi": 0.708,
+   "z": -3.966,
+   "p": 7.314492708035032e-05
+  },
+  "hidden:auditable": {
+   "b": 0.1831,
+   "se": 0.2468,
+   "or": 1.201,
+   "lo": 0.74,
+   "hi": 1.948,
+   "z": 0.742,
+   "p": 0.4581155929497721
+  }
+ },
+ "model_verify": {
+  "Intercept": {
+   "b": 0.9912,
+   "se": 0.1413,
+   "or": 2.694,
+   "lo": 2.043,
+   "hi": 3.554,
+   "z": 7.017,
+   "p": 2.2698316918196983e-12
+  },
+  "hidden": {
+   "b": -0.7647,
+   "se": 0.175,
+   "or": 0.465,
+   "lo": 0.33,
+   "hi": 0.656,
+   "z": -4.369,
+   "p": 1.245588424179083e-05
+  },
+  "auditable": {
+   "b": -0.019,
+   "se": 0.1998,
+   "or": 0.981,
+   "lo": 0.663,
+   "hi": 1.451,
+   "z": -0.095,
+   "p": 0.9243761022719524
+  },
+  "hidden:auditable": {
+   "b": 0.019,
+   "se": 0.2584,
+   "or": 1.019,
+   "lo": 0.614,
+   "hi": 1.691,
+   "z": 0.073,
+   "p": 0.9415076713759374
+  }
+ },
+ "model_stakes": {
+  "Intercept": {
+   "b": -1.7197,
+   "se": 0.1398,
+   "or": 0.179,
+   "lo": 0.136,
+   "hi": 0.236,
+   "z": -12.303,
+   "p": 8.720443333229383e-35
+  },
+  "hidden": {
+   "b": 0.8966,
+   "se": 0.1268,
+   "or": 2.451,
+   "lo": 1.912,
+   "hi": 3.143,
+   "z": 7.07,
+   "p": 1.5510766268127826e-12
+  },
+  "auditable": {
+   "b": 0.5344,
+   "se": 0.1241,
+   "or": 1.706,
+   "lo": 1.338,
+   "hi": 2.176,
+   "z": 4.307,
+   "p": 1.651433473237502e-05
+  },
+  "stakes_c": {
+   "b": -0.1815,
+   "se": 0.0831,
+   "or": 0.834,
+   "lo": 0.709,
+   "hi": 0.981,
+   "z": -2.185,
+   "p": 0.028902915018808942
+  }
+ },
+ "or_high_stakes": 0.266,
+ "or_low_stakes": 0.338,
+ "n_high_stakes": 748,
+ "n_low_stakes": 65,
+ "opt_obs": 399,
+ "opt_participants": 133,
+ "opt_mean": 1.88,
+ "opt_var": 1.78,
+ "opt_mean_overreliant": 1.75,
+ "opt_mean_not": 1.94,
+ "opt_mean_hidden": 1.85,
+ "opt_mean_visible": 1.91,
+ "model_options": {
+  "Intercept": {
+   "irr": 2.017,
+   "lo": 1.801,
+   "hi": 2.258,
+   "p": 4.106880361241324e-34
+  },
+  "over_reliance": {
+   "irr": 0.936,
+   "lo": 0.8,
+   "hi": 1.096,
+   "p": 0.4132132639301912
+  },
+  "hidden": {
+   "irr": 0.995,
+   "lo": 0.864,
+   "hi": 1.147,
+   "p": 0.9483516449716809
+  },
+  "auditable": {
+   "irr": 0.91,
+   "lo": 0.785,
+   "hi": 1.056,
+   "p": 0.21419489980035733
+  }
+ },
+ "opt_dispersion": 0.948,
+ "model_expertise": {
+  "Intercept": {
+   "b": -1.7237,
+   "se": 0.1394,
+   "or": 0.178,
+   "lo": 0.136,
+   "hi": 0.234,
+   "z": -12.366,
+   "p": 3.9988172865908577e-35
+  },
+  "hidden": {
+   "b": 0.9183,
+   "se": 0.1298,
+   "or": 2.505,
+   "lo": 1.942,
+   "hi": 3.23,
+   "z": 7.076,
+   "p": 1.4885761795178262e-12
+  },
+  "exp_c": {
+   "b": -0.1483,
+   "se": 0.1166,
+   "or": 0.862,
+   "lo": 0.686,
+   "hi": 1.084,
+   "z": -1.272,
+   "p": 0.20338003875263266
+  },
+  "hidden:exp_c": {
+   "b": 0.0309,
+   "se": 0.1115,
+   "or": 1.031,
+   "lo": 0.829,
+   "hi": 1.283,
+   "z": 0.277,
+   "p": 0.7815007815867128
+  },
+  "auditable": {
+   "b": 0.511,
+   "se": 0.1224,
+   "or": 1.667,
+   "lo": 1.311,
+   "hi": 2.119,
+   "z": 4.173,
+   "p": 3.007031363997561e-05
+  }
+ },
+ "robust_independence": {
+  "Intercept": {
+   "b": -1.7614,
+   "se": 0.1741,
+   "or": 0.172,
+   "lo": 0.122,
+   "hi": 0.242,
+   "z": -10.119,
+   "p": 4.561161499265902e-24
+  },
+  "hidden": {
+   "b": 0.9882,
+   "se": 0.2134,
+   "or": 2.686,
+   "lo": 1.768,
+   "hi": 4.082,
+   "z": 4.63,
+   "p": 3.66255710726859e-06
+  },
+  "auditable": {
+   "b": 0.5913,
+   "se": 0.2056,
+   "or": 1.806,
+   "lo": 1.207,
+   "hi": 2.703,
+   "z": 2.877,
+   "p": 0.004019973520062984
+  },
+  "hidden:auditable": {
+   "b": -0.1366,
+   "se": 0.2816,
+   "or": 0.872,
+   "lo": 0.502,
+   "hi": 1.515,
+   "z": -0.485,
+   "p": 0.6276543548324658
+  }
+ },
+ "robust_lpm": {
+  "Intercept": {
+   "b": 0.1429,
+   "p": 4.630733275413906e-08
+  },
+  "hidden": {
+   "b": 0.1767,
+   "p": 1.3266991456655773e-12
+  },
+  "auditable": {
+   "b": 0.0977,
+   "p": 8.74694085157774e-05
+  }
+ },
+ "n_suspicion": 54,
+ "n_nosusp": 79,
+ "robust_nosuspicion": {
+  "Intercept": {
+   "b": -1.8216,
+   "se": 0.2233,
+   "or": 0.162,
+   "lo": 0.104,
+   "hi": 0.251,
+   "z": -8.159,
+   "p": 3.367737089568477e-16
+  },
+  "hidden": {
+   "b": 1.304,
+   "se": 0.2664,
+   "or": 3.684,
+   "lo": 2.185,
+   "hi": 6.211,
+   "z": 4.894,
+   "p": 9.869349739220343e-07
+  },
+  "auditable": {
+   "b": 0.773,
+   "se": 0.2378,
+   "or": 2.166,
+   "lo": 1.359,
+   "hi": 3.453,
+   "z": 3.25,
+   "p": 0.0011538573747942775
+  },
+  "hidden:auditable": {
+   "b": -0.6662,
+   "se": 0.3373,
+   "or": 0.514,
+   "lo": 0.265,
+   "hi": 0.995,
+   "z": -1.975,
+   "p": 0.048280526451733724
+  }
+ },
+ "mcnemar_more_hidden": 76,
+ "mcnemar_more_visible": 20,
+ "mcnemar_tied": 37,
+ "mcnemar_p": 7.319367989521492e-09,
+ "mc_immediate_pct": 78.9,
+ "mc_count_pct": 29.3,
+ "mc_count_median": 4.0,
+ "suspicion_pct": 40.6,
+ "attn_pass_pct": 90.5,
+ "profile_role": {
+  "Manager with budget or people responsibility": {
+   "n": 57,
+   "pct": 42.9
+  },
+  "Analyst or specialist supporting decisions": {
+   "n": 52,
+   "pct": 39.1
+  },
+  "Senior leader or director": {
+   "n": 24,
+   "pct": 18.0
+  }
+ },
+ "profile_sector": {
+  "Technology and software": {
+   "n": 23,
+   "pct": 17.3
+  },
+  "Manufacturing and industrial": {
+   "n": 23,
+   "pct": 17.3
+  },
+  "Banking and financial services": {
+   "n": 22,
+   "pct": 16.5
+  },
+  "Retail and consumer goods": {
+   "n": 13,
+   "pct": 9.8
+  },
+  "Consulting and professional services": {
+   "n": 11,
+   "pct": 8.3
+  },
+  "Logistics, transport and supply chain": {
+   "n": 9,
+   "pct": 6.8
+  },
+  "Education": {
+   "n": 8,
+   "pct": 6.0
+  },
+  "Energy and utilities": {
+   "n": 8,
+   "pct": 6.0
+  },
+  "Healthcare and life sciences": {
+   "n": 7,
+   "pct": 5.3
+  },
+  "Public sector and government": {
+   "n": 6,
+   "pct": 4.5
+  },
+  "Other": {
+   "n": 3,
+   "pct": 2.3
+  }
+ },
+ "profile_experience": {
+  "5 to 9 years": {
+   "n": 39,
+   "pct": 29.3
+  },
+  "15 years or more": {
+   "n": 31,
+   "pct": 23.3
+  },
+  "10 to 14 years": {
+   "n": 30,
+   "pct": 22.6
+  },
+  "2 to 4 years": {
+   "n": 23,
+   "pct": 17.3
+  },
+  "Less than 2 years": {
+   "n": 10,
+   "pct": 7.5
+  }
+ },
+ "profile_seniority": {
+  "Manager": {
+   "n": 41,
+   "pct": 30.8
+  },
+  "Team lead or assistant manager": {
+   "n": 25,
+   "pct": 18.8
+  },
+  "Senior manager or head of function": {
+   "n": 25,
+   "pct": 18.8
+  },
+  "Analyst or executive": {
+   "n": 24,
+   "pct": 18.0
+  },
+  "Director or above": {
+   "n": 18,
+   "pct": 13.5
+  }
+ },
+ "profile_org_size": {
+  "5,000 or more": {
+   "n": 43,
+   "pct": 32.3
+  },
+  "250 to 999": {
+   "n": 33,
+   "pct": 24.8
+  },
+  "1,000 to 4,999": {
+   "n": 24,
+   "pct": 18.0
+  },
+  "50 to 249": {
+   "n": 17,
+   "pct": 12.8
+  },
+  "Fewer than 50": {
+   "n": 16,
+   "pct": 12.0
+  }
+ },
+ "profile_use_frequency": {
+  "Daily": {
+   "n": 73,
+   "pct": 54.9
+  },
+  "Several times a week": {
+   "n": 43,
+   "pct": 32.3
+  },
+  "About once a week": {
+   "n": 17,
+   "pct": 12.8
+  }
+ },
+ "profile_dissent_route": {
+  "1": {
+   "n": 58,
+   "pct": 43.6
+  },
+  "0": {
+   "n": 29,
+   "pct": 21.8
+  },
+  "2": {
+   "n": 27,
+   "pct": 20.3
+  },
+  "3": {
+   "n": 19,
+   "pct": 14.3
+  }
+ },
+ "profile_analytics_familiarity": {
+  "3": {
+   "n": 47,
+   "pct": 35.3
+  },
+  "4": {
+   "n": 47,
+   "pct": 35.3
+  },
+  "2": {
+   "n": 20,
+   "pct": 15.0
+  },
+  "5": {
+   "n": 16,
+   "pct": 12.0
+  },
+  "1": {
+   "n": 3,
+   "pct": 2.3
+  }
+ },
+ "n_followup_consent": 51,
+ "n_interviews": 26,
+ "check_all_four_cells": true,
+ "check_versions": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "check_scenario_balance": true,
+ "check_balance_table": {
+  "fraud": {
+   "hidden_auditable": 40,
+   "hidden_own": 26,
+   "visible_auditable": 39,
+   "visible_own": 28
+  },
+  "freight": {
+   "hidden_auditable": 26,
+   "hidden_own": 39,
+   "visible_auditable": 28,
+   "visible_own": 40
+  },
+  "kiln": {
+   "hidden_auditable": 28,
+   "hidden_own": 40,
+   "visible_auditable": 26,
+   "visible_own": 39
+  },
+  "kovai": {
+   "hidden_auditable": 39,
+   "hidden_own": 28,
+   "visible_auditable": 40,
+   "visible_own": 26
+  },
+  "pricing": {
+   "hidden_auditable": 26,
+   "hidden_own": 39,
+   "visible_auditable": 28,
+   "visible_own": 40
+  },
+  "retention": {
+   "hidden_auditable": 40,
+   "hidden_own": 26,
+   "visible_auditable": 39,
+   "visible_own": 28
+  },
+  "supplier": {
+   "hidden_auditable": 28,
+   "hidden_own": 40,
+   "visible_auditable": 26,
+   "visible_own": 39
+  },
+  "ward": {
+   "hidden_auditable": 39,
+   "hidden_own": 28,
+   "visible_auditable": 40,
+   "visible_own": 26
+  }
+ },
+ "simple_auditable_visible": {
+  "Intercept": {
+   "or": 0.172,
+   "lo": 0.122,
+   "hi": 0.242,
+   "p": 4.561161499267373e-24
+  },
+  "auditable": {
+   "or": 1.806,
+   "lo": 1.207,
+   "hi": 2.703,
+   "p": 0.004019973520063368
+  }
+ },
+ "simple_auditable_hidden": {
+  "Intercept": {
+   "or": 0.462,
+   "lo": 0.348,
+   "hi": 0.613,
+   "p": 8.710449573889481e-08
+  },
+  "auditable": {
+   "or": 1.576,
+   "lo": 1.134,
+   "hi": 2.19,
+   "p": 0.0067530602680238305
+  }
+ },
+ "simple_hidden_own": {
+  "Intercept": {
+   "or": 0.172,
+   "lo": 0.122,
+   "hi": 0.242,
+   "p": 4.5611614992646906e-24
+  },
+  "hidden": {
+   "or": 2.686,
+   "lo": 1.768,
+   "hi": 4.082,
+   "p": 3.6625571072688002e-06
+  }
+ },
+ "simple_hidden_auditable": {
+  "Intercept": {
+   "or": 0.31,
+   "lo": 0.229,
+   "hi": 0.42,
+   "p": 3.600560494870979e-14
+  },
+  "hidden": {
+   "or": 2.343,
+   "lo": 1.679,
+   "hi": 3.27,
+   "p": 5.509611370831647e-07
+  }
+ },
+ "decomp": {
+  "baseline": 0.147,
+  "detection": 0.169,
+  "authority": 0.09,
+  "joint": 0.421,
+  "residual": 0.015,
+  "detection_share": 0.617,
+  "authority_share": 0.328
+ },
+ "by_position": {
+  "1": {
+   "over_reliance": 0.278,
+   "seconds": 95.0
+  },
+  "2": {
+   "over_reliance": 0.293,
+   "seconds": 88.0
+  },
+  "3": {
+   "over_reliance": 0.308,
+   "seconds": 90.0
+  },
+  "4": {
+   "over_reliance": 0.256,
+   "seconds": 77.0
+  },
+  "5": {
+   "over_reliance": 0.211,
+   "seconds": 64.0
+  },
+  "6": {
+   "over_reliance": 0.293,
+   "seconds": 72.0
+  },
+  "7": {
+   "over_reliance": 0.278,
+   "seconds": 61.0
+  },
+  "8": {
+   "over_reliance": 0.323,
+   "seconds": 65.0
+  }
+ },
+ "model_position": {
+  "Intercept": {
+   "or": 0.173,
+   "lo": 0.121,
+   "hi": 0.246,
+   "p": 3.135674148379063e-22
+  },
+  "hidden": {
+   "or": 2.487,
+   "lo": 1.932,
+   "hi": 3.202,
+   "p": 1.565772197745962e-12
+  },
+  "auditable": {
+   "or": 1.663,
+   "lo": 1.311,
+   "hi": 2.111,
+   "p": 2.8481437711892994e-05
+  },
+  "position": {
+   "or": 1.01,
+   "lo": 0.955,
+   "hi": 1.068,
+   "p": 0.7269094830466967
+  }
+ },
+ "conf_when_right": 5.42,
+ "conf_when_wrong": 5.15,
+ "conf_gap": 0.27,
+ "calib_hidden": {
+  "right": 5.64,
+  "wrong": 5.29
+ },
+ "calib_visible": {
+  "right": 5.28,
+  "wrong": 4.97
+ },
+ "model_confidence": {
+  "Intercept": {
+   "b": 4.99,
+   "se": 0.068,
+   "p": 0.0
+  },
+  "hidden": {
+   "b": 0.338,
+   "se": 0.054,
+   "p": 4.815627353584512e-10
+  },
+  "auditable": {
+   "b": -0.047,
+   "se": 0.059,
+   "p": 0.4324292535348091
+  },
+  "accuracy": {
+   "b": 0.314,
+   "se": 0.064,
+   "p": 8.033662822833422e-07
+  }
+ },
+ "secs_overreliant": 75.0,
+ "secs_not": 74.0,
+ "model_time": {
+  "Intercept": {
+   "or": 0.209,
+   "lo": 0.144,
+   "hi": 0.303,
+   "p": 1.7692133180986803e-16
+  },
+  "hidden": {
+   "or": 2.479,
+   "lo": 1.928,
+   "hi": 3.189,
+   "p": 1.5555907458218322e-12
+  },
+  "auditable": {
+   "or": 1.656,
+   "lo": 1.305,
+   "hi": 2.102,
+   "p": 3.287188639579448e-05
+  },
+  "I(seconds_on_page / 60)": {
+   "or": 0.906,
+   "lo": 0.78,
+   "hi": 1.052,
+   "p": 0.1944019133286996
+  }
+ },
+ "never_overrelied": 17,
+ "always_hi": 7,
+ "dist_overreliance_count": {
+  "0": 17,
+  "1": 41,
+  "2": 26,
+  "3": 17,
+  "4": 13,
+  "5": 12,
+  "6": 7
+ },
+ "mean_overrel_per_person": 2.24,
+ "n_iv": 26,
+ "ratings": {
+  "R1": {
+   "stmt": "go with the dashboard when it conflicts with ground knowledge",
+   "mean": 3.81,
+   "sd": 1.36,
+   "pct_agree": 30.8
+  },
+  "R2": {
+   "stmt": "can tell from the screen whether the data is current",
+   "mean": 3.36,
+   "sd": 0.91,
+   "pct_agree": 11.5
+  },
+  "R3": {
+   "stmt": "a report-backed decision is easier to defend than a judgement-backed one",
+   "mean": 5.81,
+   "sd": 0.75,
+   "pct_agree": 96.2
+  },
+  "R4": {
+   "stmt": "follow the dashboard, bad outcome: personally held responsible",
+   "mean": 3.23,
+   "sd": 0.95,
+   "pct_agree": 11.5
+  },
+  "R5": {
+   "stmt": "overrule the dashboard, bad outcome: personally held responsible",
+   "mean": 5.46,
+   "sd": 0.76,
+   "pct_agree": 92.3
+  },
+  "R6": {
+   "stmt": "disagreement with a report gets recorded somewhere",
+   "mean": 3.58,
+   "sd": 1.5,
+   "pct_agree": 30.8
+  },
+  "R7": {
+   "stmt": "someone must formally answer a raised concern before the decision proceeds",
+   "mean": 3.04,
+   "sd": 1.62,
+   "pct_agree": 19.2
+  },
+  "R8": {
+   "stmt": "working from dashboards narrows the options the team considers",
+   "mean": 4.85,
+   "sd": 0.88,
+   "pct_agree": 69.2
+  }
+ },
+ "blame_gap": {
+  "mean": 2.23,
+  "sd": 1.5,
+  "t": 7.56,
+  "df": 25,
+  "p": 6.507574660949175e-08,
+  "d": 1.48,
+  "pct_positive": 80.8
+ },
+ "rating_behaviour_corr": {
+  "R1": {
+   "rho": 0.775,
+   "p": 3.337022283391314e-06,
+   "n": 26
+  },
+  "R3": {
+   "rho": 0.555,
+   "p": 0.003220795212831944,
+   "n": 26
+  },
+  "R8": {
+   "rho": 0.431,
+   "p": 0.02781015015208143,
+   "n": 26
+  },
+  "blame_asymmetry_R5_minus_R4": {
+   "rho": 0.622,
+   "p": 0.0006865071425423371,
+   "n": 26
+  },
+  "R7": {
+   "rho": -0.664,
+   "p": 0.00029845134143244263,
+   "n": 25
+  },
+  "R6": {
+   "rho": -0.695,
+   "p": 8.221174992184895e-05,
+   "n": 26
+  }
+ },
+ "iv_n": 26,
+ "iv_codes": {
+  "T1_asymmetry_stated": {
+   "desc": "Following the screen and being wrong is treated as a system or process matter; overruling and being wrong is treated as a personal matter.",
+   "n": 21,
+   "pct": 80.8,
+   "mean_over_reliance_present": 0.25,
+   "mean_over_reliance_absent": 0.3
+  },
+  "T1_following_is_safe": {
+   "desc": "Explicit statement that following the system carries no personal cost.",
+   "n": 13,
+   "pct": 50.0,
+   "mean_over_reliance_present": 0.26,
+   "mean_over_reliance_absent": 0.26
+  },
+  "T1_deviation_is_personal": {
+   "desc": "Deviation is described as attracting personal scrutiny, appraisal or audit consequences.",
+   "n": 23,
+   "pct": 88.5,
+   "mean_over_reliance_present": 0.245,
+   "mean_over_reliance_absent": 0.375
+  },
+  "T2_not_recorded": {
+   "desc": "The objection was raised but was not written anywhere durable.",
+   "n": 18,
+   "pct": 69.2,
+   "mean_over_reliance_present": 0.319,
+   "mean_over_reliance_absent": 0.125
+  },
+  "T2_report_never_corrected": {
+   "desc": "The underlying fault was fixed but the report or record carrying the wrong number was not.",
+   "n": 8,
+   "pct": 30.8,
+   "mean_over_reliance_present": 0.344,
+   "mean_over_reliance_absent": 0.222
+  },
+  "T2_recording_not_answering": {
+   "desc": "The objection was recorded but nobody was obliged to respond to it.",
+   "n": 4,
+   "pct": 15.4,
+   "mean_over_reliance_present": 0.094,
+   "mean_over_reliance_absent": 0.29
+  },
+  "T3_defensive_paper": {
+   "desc": "The manager creates a written record before deviating, in order to be defensible later.",
+   "n": 8,
+   "pct": 30.8,
+   "mean_over_reliance_present": 0.188,
+   "mean_over_reliance_absent": 0.292
+  },
+  "T3_verbal_caveat": {
+   "desc": "Disagreement is expressed verbally only, so that it leaves no trace but preserves deniability.",
+   "n": 6,
+   "pct": 23.1,
+   "mean_over_reliance_present": 0.458,
+   "mean_over_reliance_absent": 0.2
+  },
+  "T4_no_staleness_signal": {
+   "desc": "The tools show no warning when a feed has failed or the data is stale.",
+   "n": 13,
+   "pct": 50.0,
+   "mean_over_reliance_present": 0.308,
+   "mean_over_reliance_absent": 0.212
+  },
+  "T5_asymmetry_reverses": {
+   "desc": "DISCONFIRMING: the asymmetry is absent or runs the other way, because a personal signature, a safety justification or a statutory forum makes caution the defensible course.",
+   "n": 9,
+   "pct": 34.6,
+   "mean_over_reliance_present": 0.111,
+   "mean_over_reliance_absent": 0.338
+  },
+  "T5_forum_makes_it_work": {
+   "desc": "The objection survived because a standing forum with minutes and a named action owner was obliged to take it.",
+   "n": 9,
+   "pct": 34.6,
+   "mean_over_reliance_present": 0.125,
+   "mean_over_reliance_absent": 0.331
+  },
+  "T6_seniority_substitutes": {
+   "desc": "The objection carried because of the objector's rank rather than because of any mechanism.",
+   "n": 7,
+   "pct": 26.9,
+   "mean_over_reliance_present": 0.411,
+   "mean_over_reliance_absent": 0.204
+  },
+  "T7_options_narrowed": {
+   "desc": "Working from the dashboard is said to remove options from discussion.",
+   "n": 15,
+   "pct": 57.7,
+   "mean_over_reliance_present": 0.233,
+   "mean_over_reliance_absent": 0.295
+  }
+ },
+ "iv_sectors": {
+  "Technology and software": 5,
+  "Retail and consumer goods": 3,
+  "Manufacturing and industrial": 3,
+  "Banking and financial services": 3,
+  "Healthcare and life sciences": 2,
+  "Education": 2,
+  "Energy and utilities": 2,
+  "Public sector and government": 2,
+  "Consulting and professional services": 2,
+  "Logistics, transport and supply chain": 2
+ },
+ "iv_seniority": {
+  "Senior manager or head of function": 7,
+  "Manager": 6,
+  "Team lead or assistant manager": 5,
+  "Director or above": 4,
+  "Analyst or executive": 4
+ },
+ "iv_countries": {
+  "India": 23,
+  "Singapore": 1,
+  "United Arab Emirates": 1,
+  "United Kingdom": 1
+ },
+ "iv_median_words": 956,
+ "iv_reversal_n": 9,
+ "iv_reversal_over_reliance": 0.111,
+ "iv_nonreversal_over_reliance": 0.338,
+ "iv_reversal_sectors": [
+  "Banking and financial services",
+  "Consulting and professional services",
+  "Energy and utilities",
+  "Healthcare and life sciences",
+  "Manufacturing and industrial",
+  "Technology and software"
+ ],
+ "iv_behaviour_tests": {
+  "T5_asymmetry_reverses": {
+   "n_present": 9,
+   "n_absent": 17,
+   "median_present": 0.125,
+   "median_absent": 0.25,
+   "mean_present": 0.111,
+   "mean_absent": 0.338,
+   "U": 27.0,
+   "p": 0.006263921059966538
+  },
+  "T5_forum_makes_it_work": {
+   "n_present": 9,
+   "n_absent": 17,
+   "median_present": 0.125,
+   "median_absent": 0.25,
+   "mean_present": 0.125,
+   "mean_absent": 0.331,
+   "U": 33.5,
+   "p": 0.017739503533422765
+  },
+  "T2_not_recorded": {
+   "n_present": 18,
+   "n_absent": 8,
+   "median_present": 0.25,
+   "median_absent": 0.125,
+   "mean_present": 0.319,
+   "mean_absent": 0.125,
+   "U": 110.0,
+   "p": 0.031048163886963607
+  },
+  "T3_verbal_caveat": {
+   "n_present": 6,
+   "n_absent": 20,
+   "median_present": 0.5,
+   "median_absent": 0.125,
+   "mean_present": 0.458,
+   "mean_absent": 0.2,
+   "U": 100.0,
+   "p": 0.012836764013844799
+  },
+  "T6_seniority_substitutes": {
+   "n_present": 7,
+   "n_absent": 19,
+   "median_present": 0.5,
+   "median_absent": 0.125,
+   "mean_present": 0.411,
+   "mean_absent": 0.204,
+   "U": 99.5,
+   "p": 0.05181364141717922
+  }
+ },
+ "iv_blame_by_reversal": {
+  "reversal_mean": 0.78,
+  "reversal_sd": 1.09,
+  "other_mean": 3.0,
+  "other_sd": 1.06,
+  "t": -5.03,
+  "p": 3.8436320593610906e-05
+ },
+ "model_route": {
+  "Intercept": {
+   "or": 0.183,
+   "lo": 0.136,
+   "hi": 0.246,
+   "p": 1.7671141617731952e-29
+  },
+  "hidden": {
+   "or": 2.487,
+   "lo": 1.932,
+   "hi": 3.201,
+   "p": 1.5118456141891022e-12
+  },
+  "auditable": {
+   "or": 1.663,
+   "lo": 1.31,
+   "hi": 2.111,
+   "p": 2.9105551866313007e-05
+  },
+  "route_used": {
+   "or": 0.939,
+   "lo": 0.602,
+   "hi": 1.466,
+   "p": 0.7824891866812378
+  }
+ },
+ "route_table": {
+  "formal route, used": {
+   "n_participants": 29,
+   "n_obs": 232,
+   "over_reliance": 0.267,
+   "accuracy": 0.478,
+   "pct": 21.8
+  },
+  "route on paper, rarely used": {
+   "n_participants": 58,
+   "n_obs": 464,
+   "over_reliance": 0.237,
+   "accuracy": 0.425,
+   "pct": 43.6
+  },
+  "no formal route": {
+   "n_participants": 27,
+   "n_obs": 216,
+   "over_reliance": 0.37,
+   "accuracy": 0.333,
+   "pct": 20.3
+  },
+  "do not know": {
+   "n_participants": 19,
+   "n_obs": 152,
+   "over_reliance": 0.303,
+   "accuracy": 0.355,
+   "pct": 14.3
+  }
+ },
+ "route_kruskal": {
+  "H": 7.53,
+  "df": 3,
+  "p": 0.05691257882429605
+ },
+ "route_mw": {
+  "U": 1451.5,
+  "p": 0.755131933616798,
+  "mean_used": 0.267,
+  "mean_other": 0.284
+ }
+}

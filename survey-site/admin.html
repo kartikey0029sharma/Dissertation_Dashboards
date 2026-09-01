@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Researcher tools — Decision-Making with Business Intelligence Dashboards</title>
+<style>
+  :root{
+    --ink:#16191D; --body:#23282D; --mid:#6C737B; --line:#D5D8DC; --pale:#F0F1F3;
+    --paper:#FAFAF9; --page:#F5F5F3; --slate:#2E3D52;
+    --ok:#4A6E52; --bad:#8C3B36;
+    --noticebg:#FBF7EC; --noticeline:#BFA25C; --noticeink:#6A5518;
+    --serif:Georgia,"Times New Roman",Cambria,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--body);font:15.5px/1.65 var(--sans)}
+  .wrap{max-width:900px;margin:0 auto;padding:0 16px 64px}
+  header{background:#fff;border-bottom:2px solid var(--ink);padding:20px 0;margin-bottom:20px}
+  header .wrap{padding-bottom:0}
+  header h1{margin:0 0 3px;font:600 21px/1.3 var(--serif);color:var(--ink)}
+  header p{margin:0;font-size:12.5px;color:var(--mid)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:3px;padding:24px 26px;margin-bottom:18px}
+  h2{font:600 18px/1.35 var(--serif);margin:0 0 6px;color:var(--ink)}
+  h3{font-size:12px;margin:22px 0 8px;color:var(--ink);text-transform:uppercase;letter-spacing:.9px;font-weight:700}
+  p{margin:0 0 12px}
+  .muted{color:var(--mid);font-size:13.5px}
+  label.q{display:block;font-weight:600;margin:16px 0 6px;color:var(--ink)}
+  input[type=text],input[type=password],input[type=file]{
+    width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:3px;font:inherit;background:#fff}
+  .btn{background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:3px;padding:10px 18px;
+       font:600 14px/1.2 var(--sans);cursor:pointer;letter-spacing:.2px;margin:0 8px 8px 0}
+  .btn:hover{background:var(--slate);border-color:var(--slate)}
+  .btn.ghost{background:#fff;color:var(--ink)}
+  .btn.ghost:hover{background:var(--pale)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;flex-wrap:wrap;align-items:center;margin-top:16px}
+  .box{border:1px solid var(--line);border-left:3px solid var(--mid);background:var(--paper);
+       padding:12px 14px;margin:14px 0 0;font-size:13.5px}
+  .box.ok{border-left-color:var(--ok);background:#F3F7F4}
+  .box.bad{border-left-color:var(--bad);background:#FBF3F2}
+  .box.note{border-left-color:var(--noticeline);background:var(--noticebg);color:var(--noticeink)}
+  table.g{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+  table.g th{text-align:left;color:var(--mid);font-weight:500;font-size:10px;text-transform:uppercase;
+       letter-spacing:.4px;padding:0 8px 5px 0;border-bottom:1px solid var(--line)}
+  table.g td{padding:6px 8px 6px 0;border-bottom:1px solid #EFF0F2}
+  table.g td.n{font-weight:700;color:var(--ink);text-align:right;width:90px}
+  .bar{height:4px;background:var(--line);margin-top:10px;overflow:hidden}
+  .bar span{display:block;height:100%;background:var(--ink);width:0;transition:width .2s}
+  code{background:var(--pale);padding:1px 5px;border-radius:2px;font-size:13px;font-family:ui-monospace,Consolas,monospace}
+  .kv{display:flex;gap:24px;flex-wrap:wrap;margin-top:12px}
+  .kv div{min-width:110px}
+  .kv .n{font:700 24px/1.2 var(--serif);color:var(--ink)}
+  .kv .l{font-size:10.5px;color:var(--mid);text-transform:uppercase;letter-spacing:.6px}
+  .kv .s{font-size:11px;color:var(--mid);margin-top:2px}
+
+  /* the analysis output */
+  #analysis{margin-top:18px}
+  .an-card{border:1px solid var(--line);border-radius:3px;background:#fff;padding:18px 20px;margin-bottom:16px}
+  .an-card h3{font:600 15px/1.35 var(--serif);color:var(--ink);margin:0 0 4px;
+              text-transform:none;letter-spacing:0}
+  .an-card h4{font-size:11px;margin:20px 0 6px;color:var(--ink);text-transform:uppercase;
+              letter-spacing:.8px;font-weight:700}
+  .an-note{color:var(--mid);font-size:12.5px;line-height:1.6;margin:8px 0 12px}
+  .an-note b{color:var(--body)}
+  .an-card svg{margin:10px 0 6px}
+  table.an-t{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0 0}
+  table.an-t th{text-align:left;color:var(--mid);font-weight:500;font-size:9.5px;
+       text-transform:uppercase;letter-spacing:.5px;padding:0 10px 5px 0;border-bottom:1px solid var(--line)}
+  table.an-t td{padding:5px 10px 5px 0;border-bottom:1px solid #F0EFEC;vertical-align:top}
+  table.an-t th.r, table.an-t td.r{text-align:right;font-variant-numeric:tabular-nums}
+  .an-legend{display:flex;gap:18px;flex-wrap:wrap;font-size:11.5px;color:var(--body);margin:6px 0 0}
+  .an-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+  .an-cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:720px){.an-cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <h1>Researcher tools</h1>
+  <p>Decision-Making with Business Intelligence Dashboards &nbsp;·&nbsp; MSc Business Analytics (ISO8007)</p>
+</div></header>
+
+<div class="wrap">
+
+<section class="card">
+  <h2>Connection</h2>
+  <p class="muted">This page holds no data of its own. The admin key is the secret set on the Worker
+  with <code>wrangler secret put ADMIN_KEY</code>. It is sent in a request header, never in the
+  address bar, so it does not end up in browser history or in any intermediary log. It is not stored
+  here and it is not in the repository.</p>
+
+  <label class="q">Worker endpoint</label>
+  <input type="text" id="ep" placeholder="https://dashboard-study.<your-subdomain>.workers.dev">
+
+  <label class="q">Admin key</label>
+  <input type="password" id="key" placeholder="the ADMIN_KEY secret" autocomplete="off">
+
+  <div class="row"><button class="btn ghost" onclick="checkStatus()">Check the connection and what has been collected</button></div>
+  <div class="box" id="status">Nothing requested yet.</div>
+  <div id="summary"></div>
+</section>
+
+<section class="card">
+  <h2>Extract the data</h2>
+  <p class="muted">Each button downloads everything collected so far in that table. The survey file
+  has one row per vignette; the interview file has one row per participant; the combined file is the
+  survey with each participant's interview answers repeated across their rows, which is the shape the
+  analysis script expects.</p>
+  <div class="row">
+    <button class="btn" onclick="extract('survey')">Survey (CSV)</button>
+    <button class="btn" onclick="extract('interview')">Written interviews (CSV)</button>
+    <button class="btn" onclick="extract('combined')">Survey plus interviews (CSV)</button>
+  </div>
+  <div class="box note" id="extract-note">Neither file contains personal data. The study collects no
+  name, no email address and no IP address, so a response can only be identified by its reference,
+  which the participant alone holds.</div>
+  <div class="box" id="exstatus">Nothing extracted yet.</div>
+</section>
+
+<section class="card">
+  <h2>Upload data collected offline</h2>
+  <p class="muted">Use this for responses that did not reach the store: a participant who emailed
+  their own file after a failed send, or a batch typed up from paper. Select one file or many. A
+  single file may hold hundreds of participants; it is split into batches automatically.</p>
+
+  <h3>1. Start from a template</h3>
+  <p class="muted">Two shapes are accepted. The uploader works out which one you have from the header
+  row, so you do not have to say.</p>
+  <div class="row">
+    <button class="btn ghost" onclick="downloadTemplate('survey')">Template: survey only</button>
+    <button class="btn ghost" onclick="downloadTemplate('combined')">Template: survey plus written interview</button>
+  </div>
+  <div class="box" id="tplnote">
+    <b>Survey only.</b> One row per vignette. Eight rows per participant, all sharing a
+    <code>response_id</code>, with <code>position</code> running 1 to 8.<br>
+    <b>Survey plus written interview.</b> The same, followed by the interview columns. Repeat each
+    participant's interview answers on every one of their rows, or fill them on the first row only.
+    Either works: the first non-empty value per participant is taken.
+  </div>
+
+  <h3>2. Upload</h3>
+  <label class="q">CSV files</label>
+  <input type="file" id="files" accept=".csv,text/csv" multiple onchange="previewFiles()">
+  <div class="box" id="prestatus">No files selected.</div>
+  <div class="row"><button class="btn" id="btn-upload" onclick="uploadFiles()" disabled>Upload to the store</button></div>
+  <div class="bar" id="progwrap" hidden><span id="prog"></span></div>
+  <div class="box" id="upstatus" hidden></div>
+</section>
+
+<section class="card">
+  <h2>Analysis</h2>
+  <p class="muted">Pulls everything collected so far and computes the results the dissertation needs:
+  exclusions, over-reliance by condition, the four design cells, within-person effects with
+  confidence intervals, design integrity checks, and the written interview ratings. It runs entirely
+  in this browser, so nothing is sent anywhere and you can run it as often as you like.</p>
+
+  <label class="q">Exclude a participant whose median time per vignette is under</label>
+  <div style="display:flex;align-items:center;gap:10px;max-width:280px">
+    <input type="number" id="minsec" value="10" min="0" max="120" step="1">
+    <span class="muted" style="white-space:nowrap">seconds</span>
+  </div>
+
+  <div class="row">
+    <button class="btn" onclick="runAnalysis()">Generate the analysis dashboard</button>
+    <button class="btn ghost" id="btn-save-an" onclick="saveAnalysis()" disabled>Save it as an HTML file</button>
+  </div>
+  <div class="box" id="anstatus">Not generated yet.</div>
+  <div id="analysis"></div>
+</section>
+
+<section class="card">
+  <h2>Notes</h2>
+  <h3>Shape of the data</h3>
+  <p class="muted">A participant who finishes the survey contributes eight rows sharing a
+  <code>response_id</code>; the written interview adds one row keyed on the same id. Join on that
+  column to move between vignette level, participant level and interview level.</p>
+  <h3>Re-uploading is safe</h3>
+  <p class="muted">Rows are keyed on <code>response_id</code> and <code>position</code>, so uploading
+  the same file twice replaces those rows rather than duplicating them. That makes it safe to fix a
+  typo in a spreadsheet and upload the whole thing again.</p>
+  <h3>If the store is ever unreachable</h3>
+  <p class="muted">The Cloudflare dashboard can run <code>SELECT * FROM survey</code> against the D1
+  database directly and export the result, which is the same data by another route.</p>
+</section>
+
+</div>
+
+<script src="schema.js"></script>
+<script src="analysis.js"></script>
+<script src="config.js"></script>
+<script>
+const SCH = window.STUDY_SCHEMA;
+const CHUNK_ROWS = 400;            /* rows per request during an upload */
+
+function $(id){ return document.getElementById(id); }
+function setBox(id, kind, html){ const b = $(id); b.hidden = false; b.className = 'box ' + (kind||''); b.innerHTML = html; }
+
+(function () {
+  const cfg = window.SURVEY_CONFIG || {};
+  if (cfg.endpoint) $('ep').value = cfg.endpoint;
+})();
+
+function conn(){
+  const ep = $('ep').value.trim().replace(/\/+$/, ''), key = $('key').value.trim();
+  if (!ep)  { setBox('status', 'bad', 'Enter the Worker endpoint first. It is the URL <code>wrangler deploy</code> printed, ending in <code>.workers.dev</code>.'); return null; }
+  if (!key) { setBox('status', 'bad', 'Enter the admin key. It is the <code>ADMIN_KEY</code> secret you set on the Worker.'); return null; }
+  return { ep: ep, key: key };
+}
+
+function api(path, opts){
+  const c = conn(); if (!c) return Promise.reject(new Error('not configured'));
+  const o = Object.assign({ headers: {} }, opts || {});
+  o.headers = Object.assign({ 'X-Admin-Key': c.key }, o.headers);
+  return fetch(c.ep + path, o);
+}
+
+/* ----------------------------------------------------------------- status */
+function checkStatus(){
+  if (!conn()) return;
+  setBox('status', '', 'Asking the Worker.');
+  $('summary').innerHTML = '';
+  api('/status').then(r => {
+    if (r.status === 401) { setBox('status', 'bad', 'The Worker answered, but rejected the admin key. Check it against the secret you set.'); return null; }
+    return r.json();
+  }).then(j => {
+    if (!j) return;
+    if (!j.ok) throw new Error(j.error || 'refused');
+    setBox('status', 'ok', 'Connected.');
+    const cells = j.cells || {}, modes = j.interview_modes || {};
+    const cellKeys = Object.keys(cells).sort();
+    $('summary').innerHTML =
+      '<div class="kv">' +
+        tile(j.participants, 'participants') + tile(j.rows, 'vignette rows') +
+        tile(j.interviews, 'interviews') +
+      '</div>' +
+      (j.last_received ? '<p class="muted" style="margin-top:10px">Most recent submission: ' + j.last_received + '</p>' : '') +
+      (cellKeys.length ? '<h3>Observations per design cell</h3><table class="g">' +
+        '<tr><th>Data signal / accountability</th><th style="text-align:right">Observations</th></tr>' +
+        cellKeys.map(k => '<tr><td>' + k + '</td><td class="n">' + cells[k] + '</td></tr>').join('') +
+        '</table><p class="muted" style="margin-top:8px">The four cells should stay close to equal. A ' +
+        'persistent gap means participants are dropping out part way rather than that the allocation ' +
+        'has drifted.</p>' : '') +
+      (Object.keys(modes).length ? '<h3>Interviews by route</h3><table class="g">' +
+        Object.keys(modes).sort().map(k => '<tr><td>' + k + '</td><td class="n">' + modes[k] + '</td></tr>').join('') +
+        '</table>' : '');
+  }).catch(() => setBox('status', 'bad',
+    'Could not reach the Worker. Check the endpoint, and that <code>wrangler deploy</code> has been run.'));
+}
+function batchWord(n){ return n + ' batch' + (n === 1 ? '' : 'es'); }
+function tile(n, label){ return '<div><div class="n">' + (n === undefined ? '0' : n) + '</div><div class="l">' + label + '</div></div>'; }
+
+/* ---------------------------------------------------------------- extract */
+function extract(type){
+  if (!conn()) return;
+  setBox('exstatus', '', 'Requesting the ' + type + ' file.');
+  api('/export?type=' + encodeURIComponent(type)).then(r => {
+    if (r.status === 401) { setBox('exstatus', 'bad', 'The admin key was rejected.'); return null; }
+    if (!r.ok) { setBox('exstatus', 'bad', 'The Worker refused that request.'); return null; }
+    return r.text();
+  }).then(text => {
+    if (text === null || text === undefined) return;
+    const lines = text.trim() ? text.trim().split('\n').length : 0;
+    const name = 'dashboard_study_' + type + '_' + new Date().toISOString().slice(0, 10) + '.csv';
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type: 'text/csv' }));
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setBox('exstatus', 'ok', '<b>' + name + '</b> downloaded, ' + Math.max(0, lines - 1) + ' data rows.');
+  }).catch(() => setBox('exstatus', 'bad', 'Could not reach the Worker.'));
+}
+
+/* --------------------------------------------------------------- templates */
+function esc(v){ return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }
+function downloadTemplate(which){
+  const t = SCH.TEMPLATES[which];
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([t.cols.map(esc).join(',') + '\n'], { type: 'text/csv' }));
+  a.download = t.file;
+  document.body.appendChild(a); a.click(); a.remove();
+  setBox('tplnote', 'ok', '<b>' + t.file + '</b> downloaded, ' + t.cols.length + ' columns. ' + t.note);
+}
+
+/* ------------------------------------------------------------- analysis */
+let lastAnalysisHtml = '';
+
+function fetchCsv(type){
+  return api('/export?type=' + type).then(r => {
+    if (r.status === 401) throw new Error('the admin key was rejected');
+    if (!r.ok) throw new Error('the store refused the ' + type + ' export');
+    return r.text();
+  }).then(text => {
+    const rows = parseCsv(text);
+    if (rows.length < 2) return [];
+    const h = rows[0];
+    return rows.slice(1).map(a => { const o = {}; h.forEach((k, i) => { o[k] = a[i]; }); return o; });
+  });
+}
+
+function runAnalysis(){
+  if (!conn()) return;
+  setBox('anstatus', '', 'Fetching the data and computing.');
+  $('analysis').innerHTML = '';
+  $('btn-save-an').disabled = true;
+
+  Promise.all([fetchCsv('survey'), fetchCsv('interview')])
+    .then(([survey, interview]) => {
+      if (!survey.length) {
+        setBox('anstatus', 'bad', 'There is nothing to analyse yet. Complete the survey once, or upload a file, and try again.');
+        return;
+      }
+      const minsec = Math.max(0, parseInt($('minsec').value, 10) || 0);
+      const A = STUDY_ANALYSIS.computeAnalysis(survey, interview, { minMedianSeconds: minsec });
+      lastAnalysisHtml = STUDY_ANALYSIS.renderAnalysis(A);
+      $('analysis').innerHTML = lastAnalysisHtml;
+      $('btn-save-an').disabled = false;
+      setBox('anstatus', 'ok', '<b>Done.</b> ' + A.recruit.analytic + ' participants and ' +
+        A.recruit.observations + ' observations analysed, ' + A.recruit.excluded + ' excluded.');
+      $('analysis').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    })
+    .catch(e => setBox('anstatus', 'bad', 'Could not run the analysis: ' + e.message + '.'));
+}
+
+/* Save exactly what is on screen, styles and all, as one file that opens
+   anywhere. Useful for pasting a figure into the dissertation, and for keeping
+   a dated snapshot of where the numbers stood. */
+function saveAnalysis(){
+  if (!lastAnalysisHtml) return;
+  const css = [...document.querySelectorAll('style')].map(s => s.textContent).join('\n');
+  const doc = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<title>Analysis — Decision-Making with Business Intelligence Dashboards</title>' +
+    '<style>' + css + ' body{background:var(--page)} .wrap{max-width:900px;margin:0 auto;padding:24px 16px 64px}</style>' +
+    '</head><body><div class="wrap">' +
+    '<h1 style="font:600 21px/1.3 var(--serif);color:var(--ink);margin:0 0 4px">Analysis</h1>' +
+    '<p style="font-size:12.5px;color:var(--mid);margin:0 0 20px">Decision-Making with Business ' +
+    'Intelligence Dashboards · MSc Business Analytics (ISO8007)</p>' +
+    lastAnalysisHtml + '</div></body></html>';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([doc], { type: 'text/html' }));
+  a.download = 'dashboard_study_analysis_' + new Date().toISOString().slice(0, 10) + '.html';
+  document.body.appendChild(a); a.click(); a.remove();
+  setBox('anstatus', 'ok', 'Saved as an HTML file. Open it in any browser; it needs nothing else.');
+}
+
+/* ------------------------------------------------------------- CSV parsing */
+function parseCsv(text){
+  const rows = []; let row = [], field = '', q = false;
+  if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);        /* strip a BOM from Excel */
+  for (let i = 0; i < text.length; i++){
+    const c = text[i];
+    if (q){
+      if (c === '"'){ if (text[i+1] === '"'){ field += '"'; i++; } else q = false; }
+      else field += c;
+    } else if (c === '"') q = true;
+    else if (c === ','){ row.push(field); field = ''; }
+    else if (c === '\n'){ row.push(field); rows.push(row); row = []; field = ''; }
+    else if (c !== '\r') field += c;
+  }
+  if (field.length || row.length){ row.push(field); rows.push(row); }
+  return rows.filter(r => r.length && !(r.length === 1 && r[0].trim() === ''));
+}
+
+function detectTemplate(header){
+  const set = new Set(header);
+  const missing = SCH.TEMPLATES.survey.cols.filter(c => !set.has(c));
+  if (missing.length) return { ok: false, missing: missing };
+  const ivCols = SCH.INTERVIEW_COLS.filter(c => c !== 'response_id' && set.has(c));
+  return { ok: true, kind: ivCols.length ? 'combined' : 'survey', interviewCols: ivCols.length };
+}
+
+/* --------------------------------------------------------------- uploading */
+let pending = null;
+
+function previewFiles(){
+  const files = [...$('files').files];
+  $('btn-upload').disabled = true;
+  $('upstatus').hidden = true;
+  $('progwrap').hidden = true;
+  if (!files.length){ setBox('prestatus', '', 'No files selected.'); return; }
+  setBox('prestatus', '', 'Reading ' + files.length + ' file' + (files.length > 1 ? 's' : '') + '.');
+
+  Promise.all(files.map(f => f.text().then(t => ({ name: f.name, rows: parseCsv(t) }))))
+    .then(parsed => {
+      const good = [], bad = [];
+      let allRows = [], header = null, kinds = new Set();
+      for (const p of parsed){
+        if (p.rows.length < 2){ bad.push(p.name + ' (no data rows)'); continue; }
+        const det = detectTemplate(p.rows[0]);
+        if (!det.ok){ bad.push(p.name + ' (missing ' + det.missing.slice(0, 3).join(', ') + (det.missing.length > 3 ? ' and ' + (det.missing.length - 3) + ' more' : '') + ')'); continue; }
+        kinds.add(det.kind);
+        const h = p.rows[0];
+        const objs = p.rows.slice(1).map(arr => { const o = {}; h.forEach((k, i) => { o[k] = arr[i]; }); return o; });
+        const noId = objs.filter(o => !String(o.response_id || '').trim()).length;
+        if (noId){ bad.push(p.name + ' (' + noId + ' rows with no response_id)'); continue; }
+        allRows = allRows.concat(objs);
+        good.push(p.name + ' (' + objs.length + ' rows, ' + det.kind + ')');
+        header = header || h;
+      }
+      if (!allRows.length){
+        setBox('prestatus', 'bad', 'Nothing usable.<br>' + bad.join('<br>'));
+        pending = null; return;
+      }
+      const ids = new Set(allRows.map(r => r.response_id));
+      pending = { rows: allRows };
+      setBox('prestatus', 'ok',
+        '<b>Ready to upload ' + ids.size + ' participants, ' + allRows.length + ' rows.</b>' +
+        ' It will go up in ' + batchWord(Math.ceil(allRows.length / CHUNK_ROWS)) + '.<br>' +
+        good.join('<br>') + (bad.length ? '<br><b>Skipped:</b> ' + bad.join('; ') : ''));
+      $('btn-upload').disabled = false;
+    })
+    .catch(err => { setBox('prestatus', 'bad', 'Could not read the files: ' + err); pending = null; });
+}
+
+async function uploadFiles(){
+  if (!pending || !conn()) return;
+  $('btn-upload').disabled = true;
+  $('progwrap').hidden = false;
+  const rows = pending.rows, total = rows.length;
+  const totals = { participants: new Set(), survey: 0, interview: 0 };
+  let done = 0, batch = 0, batches = Math.ceil(total / CHUNK_ROWS);
+
+  try {
+    for (let i = 0; i < total; i += CHUNK_ROWS){
+      batch++;
+      const slice = rows.slice(i, i + CHUNK_ROWS);
+      setBox('upstatus', '', 'Uploading batch ' + batch + ' of ' + batches + ', ' + done + ' of ' + total + ' rows sent.');
+      const r = await api('/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rows: slice })
+      });
+      if (r.status === 401) throw new Error('the admin key was rejected');
+      const j = await r.json();
+      if (!j.ok) throw new Error(j.error || 'the Worker refused a batch');
+      totals.survey += j.survey_rows; totals.interview += j.interview_rows;
+      slice.forEach(s => totals.participants.add(s.response_id));
+      done += slice.length;
+      $('prog').style.width = Math.round(100 * done / total) + '%';
+    }
+    setBox('upstatus', 'ok', '<b>Upload complete.</b> ' + totals.participants.size + ' participants, ' +
+      totals.survey + ' survey rows and ' + totals.interview + ' written interviews written to the store. ' +
+      'Press <b>Check the connection</b> above to see the new totals.');
+  } catch (e){
+    setBox('upstatus', 'bad', '<b>Upload stopped after ' + done + ' of ' + total + ' rows:</b> ' + e.message +
+      '.<br>Rows already sent are saved. Fix the problem and upload the same file again; re-uploading ' +
+      'replaces rows rather than duplicating them.');
+  } finally {
+    $('btn-upload').disabled = false;
+  }
+}
+</script>
+</body>
+</html>

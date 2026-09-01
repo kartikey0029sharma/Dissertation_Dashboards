@@ -1,0 +1,27 @@
+response_id,sector,seniority,experience,exp_over_reliance,blame_gap,T1_asymmetry_stated,T1_following_is_safe,T1_deviation_is_personal,T2_not_recorded,T2_report_never_corrected,T2_recording_not_answering,T3_defensive_paper,T3_verbal_caveat,T4_no_staleness_signal,T5_asymmetry_reverses,T5_forum_makes_it_work,T6_seniority_substitutes,T7_options_narrowed
+R4TQ7M9,Retail and consumer goods,Manager,5 to 9 years,0.375,3.0,1,1,1,1,1,0,0,0,1,0,0,0,1
+R9WFH3P,Technology and software,Team lead or assistant manager,2 to 4 years,0.75,4.0,1,0,0,1,1,0,0,0,0,0,0,1,0
+RB2XK5D,Healthcare and life sciences,Senior manager or head of function,10 to 14 years,0.125,1.0,1,0,1,0,0,0,0,0,0,1,1,0,1
+RC7NJ2V,Manufacturing and industrial,Senior manager or head of function,15 years or more,0.0,0.0,1,0,1,0,0,0,0,0,1,1,1,0,0
+RF2LN7X,Education,Team lead or assistant manager,5 to 9 years,0.375,3.0,0,1,1,1,0,0,0,1,1,0,0,0,0
+RK8PV4S,Energy and utilities,Senior manager or head of function,15 years or more,0.125,0.0,1,0,1,0,0,0,0,0,0,1,1,0,1
+RM5TZ8Q,Public sector and government,Director or above,15 years or more,0.25,5.0,1,0,1,0,1,0,0,0,1,0,0,0,0
+SIM0005,Technology and software,Manager,5 to 9 years,0.0,0.0,1,0,1,1,0,1,0,0,0,1,0,0,1
+SIM0006,Technology and software,Analyst or executive,2 to 4 years,0.125,2.0,0,1,1,1,0,0,0,0,0,0,0,1,0
+SIM0009,Public sector and government,Manager,10 to 14 years,0.125,4.0,1,1,1,0,0,1,1,0,1,0,0,0,0
+SIM0011,Consulting and professional services,Analyst or executive,2 to 4 years,0.5,2.0,1,0,1,1,1,0,0,1,0,0,0,1,0
+SIM0022,Banking and financial services,Director or above,15 years or more,0.0,0.0,1,0,1,0,0,0,1,0,0,1,1,0,1
+SIM0026,Healthcare and life sciences,Manager,5 to 9 years,0.125,1.0,1,1,1,1,0,0,0,0,1,1,1,0,0
+SIM0027,Technology and software,Director or above,10 to 14 years,0.25,0.0,0,0,1,0,0,0,0,0,0,1,1,1,0
+SIM0030,Banking and financial services,Manager,5 to 9 years,0.25,2.0,1,1,1,1,0,0,1,0,0,0,0,0,1
+SIM0051,"Logistics, transport and supply chain",Senior manager or head of function,10 to 14 years,0.25,2.0,1,1,1,1,0,0,1,0,0,0,1,0,1
+SIM0053,Retail and consumer goods,Team lead or assistant manager,5 to 9 years,0.125,2.0,1,1,1,1,1,0,1,0,1,0,0,0,1
+SIM0062,Banking and financial services,Analyst or executive,2 to 4 years,0.125,2.0,1,1,1,1,1,1,1,0,0,0,0,1,1
+SIM0067,Consulting and professional services,Director or above,15 years or more,0.125,2.0,1,0,0,0,0,1,0,0,1,1,1,0,0
+SIM0073,Manufacturing and industrial,Team lead or assistant manager,2 to 4 years,0.625,5.0,0,1,1,1,0,0,0,1,1,0,0,1,1
+SIM0082,Education,Senior manager or head of function,15 years or more,0.125,3.0,0,0,1,1,0,0,1,0,0,0,1,0,1
+SIM0084,Retail and consumer goods,Senior manager or head of function,10 to 14 years,0.125,3.0,1,1,1,1,1,0,0,1,0,0,0,0,1
+SIM0092,Energy and utilities,Senior manager or head of function,15 years or more,0.25,3.0,1,1,0,1,0,0,0,0,1,1,0,0,1
+SIM0095,Technology and software,Analyst or executive,Less than 2 years,0.5,3.0,1,1,1,1,0,0,0,0,1,0,0,1,1
+SIM0102,Manufacturing and industrial,Manager,10 to 14 years,0.5,2.0,1,0,1,1,1,0,1,1,1,0,0,0,1
+SIM0121,"Logistics, transport and supply chain",Team lead or assistant manager,5 to 9 years,0.625,4.0,1,0,1,1,0,0,0,1,1,0,0,0,0
