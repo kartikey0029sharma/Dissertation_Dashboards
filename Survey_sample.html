@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision-Making with Business Intelligence Dashboards — Newcastle University Business School</title>
+<style>
+  /* Restrained academic palette. Colour is used only where it carries meaning:
+     the data quality notice, the status indicators inside a dashboard, and the
+     accountability framing. Everything else is neutral. */
+  :root{
+    --ink:#16191D;          /* headings and rules            */
+    --body:#23282D;         /* running text                  */
+    --mid:#6C737B;          /* labels and secondary text     */
+    --line:#D5D8DC;         /* hairlines and borders         */
+    --pale:#F0F1F3;         /* subtle fills                  */
+    --paper:#FAFAF9;        /* panel background              */
+    --page:#F5F5F3;         /* page background               */
+    --slate:#2E3D52;        /* single accent                 */
+    --ok:#4A6E52; --warn:#8A6D24; --bad:#8C3B36;
+    --noticebg:#FBF7EC; --noticeline:#BFA25C; --noticeink:#6A5518;
+    --serif:Georgia,"Times New Roman",Cambria,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--body);font:15.5px/1.65 var(--sans)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px 64px}
+  header{background:#fff;border-bottom:2px solid var(--ink);padding:20px 0;margin-bottom:20px}
+  header .wrap{padding-bottom:0}
+  header h1{margin:0 0 3px;font:600 21px/1.3 var(--serif);color:var(--ink);letter-spacing:0}
+  header p{margin:0;font-size:12.5px;color:var(--mid);letter-spacing:.2px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:3px;padding:24px 26px;margin-bottom:18px}
+  h2{font:600 18px/1.35 var(--serif);margin:0 0 12px;color:var(--ink)}
+  h3{font-size:12px;margin:22px 0 8px;color:var(--ink);text-transform:uppercase;letter-spacing:.9px;font-weight:700}
+  p{margin:0 0 12px}
+  ul{margin:0 0 12px 20px;padding:0}
+  li{margin-bottom:5px}
+  .muted{color:var(--mid);font-size:13.5px}
+  .step{display:none}
+  .step.active{display:block}
+  .progress{height:3px;background:var(--line);overflow:hidden;margin-bottom:18px}
+  .progress span{display:block;height:100%;background:var(--ink);width:0;transition:width .3s}
+  label.q{display:block;font-weight:600;margin:18px 0 8px;color:var(--ink)}
+  .opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:3px;
+       padding:10px 12px;margin-bottom:6px;cursor:pointer;background:#fff}
+  .opt:hover{border-color:var(--mid);background:var(--pale)}
+  .opt input{margin-top:3px;flex:none}
+  .opt.selectall{border-style:dashed;background:var(--pale);margin-bottom:14px;font-size:13.5px;color:var(--mid)}
+  .opt.selectall:hover{background:#E9EAEC}
+  select,textarea,input[type=text],input[type=number]{
+       width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:3px;font:inherit;background:#fff}
+  textarea{min-height:84px;resize:vertical}
+  .scale{display:flex;gap:5px;flex-wrap:wrap}
+  .scale label{flex:1;min-width:64px;text-align:center;border:1px solid var(--line);border-radius:3px;
+       padding:8px 4px;cursor:pointer;font-size:12.5px;color:var(--mid)}
+  .scale label:hover{border-color:var(--mid);background:var(--pale)}
+  .scale input{display:block;margin:0 auto 4px}
+  .btn{background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:3px;padding:10px 22px;
+       font:600 14.5px/1.2 var(--sans);cursor:pointer;letter-spacing:.2px}
+  .btn:hover{background:var(--slate);border-color:var(--slate)}
+  .btn.ghost{background:#fff;color:var(--ink)}
+  .btn.ghost:hover{background:var(--pale);color:var(--ink);border-color:var(--ink)}
+  .nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+  .warn{color:var(--bad);font-size:13.5px;margin-top:10px;display:none}
+
+  /* the brief */
+  .brief{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--ink);
+         padding:15px 17px;margin:0 0 16px}
+  .brief b{color:var(--ink)}
+
+  /* the dashboard, kept looking like a working screen */
+  .frame{background:var(--paper);border:1px solid var(--mid);border-radius:3px;overflow:hidden;margin-bottom:16px}
+  .fbar{background:var(--ink);color:#fff;padding:9px 14px;font-size:13px;font-weight:600;
+        display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--sans)}
+  .chip{border:1px solid rgba(255,255,255,.35);border-radius:2px;padding:2px 8px;font-size:10.5px;font-weight:400}
+  .banner{background:var(--noticebg);border:1px solid var(--noticeline);border-left:3px solid var(--noticeline);
+          color:var(--noticeink);margin:12px;padding:9px 12px;border-radius:2px;font-size:12.5px}
+  .banner b{color:var(--noticeink)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:12px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:2px;padding:10px 11px}
+  .kpi .lab{font-size:9.5px;color:var(--mid);text-transform:uppercase;letter-spacing:.6px}
+  .kpi .val{font-size:20px;font-weight:700;margin:2px 0;color:var(--ink)}
+  .kpi .d{font-size:10.5px;font-weight:600}
+  .up{color:var(--ok)} .down{color:var(--bad)} .flat{color:var(--mid);font-weight:500}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 12px 12px}
+  .pane{background:#fff;border:1px solid var(--line);border-radius:2px;padding:11px 12px}
+  .pane h4{margin:0 0 8px;font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--ink);font-weight:700}
+  table.dash{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.dash th{text-align:left;color:var(--mid);font-weight:500;font-size:10px;
+        text-transform:uppercase;letter-spacing:.4px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+  table.dash td{padding:5px 0;border-bottom:1px solid #EFF0F2}
+  tr.hl td{background:var(--pale);font-weight:700;color:var(--ink)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .bar{height:14px;background:#5A6470;display:inline-block;vertical-align:middle}
+  .bar.hero{background:var(--ink)} .bar.stale{background:#ADB2B8}
+  .src{font-size:10px;color:var(--mid);margin-top:9px}
+
+  /* accountability framing */
+  .tag{display:block;border:1px solid var(--line);border-left:3px solid var(--line);background:#fff;
+       color:var(--body);padding:8px 12px;font-size:11.5px;font-weight:600;margin:0 0 12px;
+       line-height:1.45;letter-spacing:.2px}
+  .tag.aud{border-left-color:var(--ink);background:var(--pale)}
+  .frameline{font-weight:700;color:var(--ink);margin-top:12px;display:block}
+  .done{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--ink);padding:18px}
+  .savebox{border:1px solid var(--line);border-left:3px solid var(--mid);background:var(--paper);
+           padding:11px 14px;margin:0 0 12px;font-size:13.5px}
+  .savebox.busy{border-left-color:var(--mid);color:var(--mid)}
+  .savebox.ok{border-left-color:var(--ok);background:#F3F7F4}
+  .savebox.warn{border-left-color:var(--noticeline);background:var(--noticebg);color:var(--noticeink)}
+  .savebox.warn b, .savebox.warn code{color:var(--noticeink)}
+  .counter{font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:1px;font-weight:700;
+           margin-bottom:4px}
+  code{background:var(--pale);padding:1px 5px;border-radius:2px;font-size:13px;font-family:ui-monospace,Consolas,monospace}
+  @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <h1>Decision-Making with Business Intelligence Dashboards</h1>
+  <p>Newcastle University Business School &nbsp;·&nbsp; MSc Business Analytics (ISO8007) &nbsp;·&nbsp; Researcher: Kartikey Sharma</p>
+</div></header>
+
+<div class="wrap">
+<div class="progress"><span id="pbar"></span></div>
+
+<!-- ============================================ 0. INFORMATION SHEET -->
+<section class="step active card" id="s-info">
+  <h2>Participant information sheet</h2>
+  <p><b>What is this study about?</b> It is about how managers read the dashboards and performance reports
+  they use at work, and how those screens shape the decisions that follow. It is <b>not</b> a test of your
+  ability. There is no score, and no individual result will be reported to anyone.</p>
+
+  <h3>What will I be asked to do?</h3>
+  <p>You will read eight short business situations. Each shows a performance dashboard and a brief. You
+  will choose what you would do and answer a few short questions about it, then answer some questions
+  about your organisation. It takes about <b>15 minutes</b>.</p>
+
+  <h3>Do I have to take part?</h3>
+  <p>No. Participation is voluntary. You can stop at any point by closing the page, and nothing you have
+  entered will be kept. After you submit, you may ask for your data to be deleted up to two weeks later,
+  after which the responses are anonymised and cannot be traced back.</p>
+
+  <h3>Please do not disclose confidential information</h3>
+  <p>Do not enter anything commercially sensitive: no client names, no internal figures, no screenshots of
+  your own systems. Employers are recorded by sector and size band only.</p>
+
+  <h3>How is my data handled?</h3>
+  <ul>
+    <li>Responses are stored in a spreadsheet held in the researcher's Newcastle University Google account, and are accessible only to the researcher and the supervising academic.</li>
+    <li>No name, email address or IP address is collected at any point. Your responses are anonymous, and the reference shown at the end is the only thing that links them to you.</li>
+    <li>Processing is on the basis of your consent, under the UK GDPR.</li>
+    <li>Results are reported only in aggregate, in an MSc dissertation and any publication arising from it.</li>
+  </ul>
+
+  <h3>Ethics and contact</h3>
+  <p class="muted">This study has been approved under the Newcastle University Business School ethics
+  procedure and follows the MRS Code of Conduct. Questions may be sent to
+  <code>k.sharma7@newcastle.ac.uk</code>.</p>
+
+  <div class="nav"><span></span><button class="btn" onclick="go('s-consent')">Continue</button></div>
+</section>
+
+<!-- ============================================ 1. CONSENT -->
+<section class="step card" id="s-consent">
+  <h2>Consent</h2>
+  <p class="muted">Please confirm each statement.</p>
+  <label class="opt selectall"><input type="checkbox" id="cons-all" onchange="toggleAllConsent(this)"><span>Select all five statements</span></label>
+  <label class="opt"><input type="checkbox" class="cons" onchange="syncConsent()"><span>I have read the information sheet and have had the chance to consider it.</span></label>
+  <label class="opt"><input type="checkbox" class="cons" onchange="syncConsent()"><span>I understand that taking part is voluntary and that I may stop at any time without giving a reason.</span></label>
+  <label class="opt"><input type="checkbox" class="cons" onchange="syncConsent()"><span>I understand that my responses will be anonymised and reported only in aggregate.</span></label>
+  <label class="opt"><input type="checkbox" class="cons" onchange="syncConsent()"><span>I agree not to enter confidential or commercially sensitive information.</span></label>
+  <label class="opt"><input type="checkbox" class="cons" onchange="syncConsent()"><span>I agree to take part in this study.</span></label>
+  <div class="warn" id="w-consent">Please tick all five boxes to continue.</div>
+  <div class="nav"><button class="btn ghost" onclick="go('s-info')">Back</button>
+    <button class="btn" onclick="checkConsent()">Continue</button></div>
+</section>
+
+<!-- ============================================ 2. SCREENING -->
+<section class="step card" id="s-screen">
+  <h2>Two screening questions</h2>
+  <label class="q">S1. Over the past twelve months, how often have you used a dashboard, KPI report or
+    business intelligence tool as part of your work?</label>
+  <div id="sc-freq"></div>
+  <label class="q">S2. Which best describes your role?</label>
+  <div id="sc-role"></div>
+  <div class="warn" id="w-screen">Please answer both questions.</div>
+  <div class="nav"><button class="btn ghost" onclick="go('s-consent')">Back</button>
+    <button class="btn" onclick="checkScreen()">Continue</button></div>
+</section>
+
+<!-- ============================================ 2b. SCREENED OUT -->
+<section class="step card" id="s-out">
+  <h2>Thank you for your interest</h2>
+  <p>This study is limited to people who use a dashboard or performance report at least weekly in a
+  managerial or analytical role. On this occasion you do not fall within that group, so the survey ends
+  here.</p>
+  <p class="muted">Thank you for the time you have already given.</p>
+</section>
+
+<!-- ============================================ 3. HOW IT WORKS -->
+<section class="step card" id="s-howto">
+  <h2>How the next part works</h2>
+  <p>You will see <b>eight situations</b>. Each one has three parts:</p>
+  <ul>
+    <li>a <b>dashboard</b>, of the kind used for that decision;</li>
+    <li>a short <b>brief</b> containing what else you know about the situation;</li>
+    <li>a set of questions about what you would do.</li>
+  </ul>
+  <p>The situations are unrelated to each other. There is no trick and no time limit, but please answer as
+  you would at work rather than as you think you ought to. Read the brief carefully. It is short.</p>
+  <p class="muted">Each situation also states whether the decision would be recorded against the system's
+  recommendation, or recorded as your own judgement. This differs from situation to situation, so it is
+  worth reading.</p>
+  <div class="nav"><button class="btn ghost" onclick="go('s-screen')">Back</button>
+    <button class="btn" onclick="startVignettes()">Start the first situation</button></div>
+</section>
+
+<!-- ============================================ 4. VIGNETTE -->
+<section class="step card" id="s-vig">
+  <div class="counter" id="vig-count"></div>
+  <h2 id="vig-title"></h2>
+  <div id="vig-tags"></div>
+  <div id="vig-dash"></div>
+  <div class="brief" id="vig-brief"></div>
+
+  <label class="q" id="q-dec"></label>
+  <div id="vig-options"></div>
+
+  <div id="vig-alts-wrap">
+    <label class="q">Apart from the option you chose, what other actions would you consider here?</label>
+    <p class="muted">Please list them, one per line. Write <code>none</code> if there are none.</p>
+    <textarea id="vig-alts"></textarea>
+  </div>
+
+  <label class="q">How confident are you in the action you chose?</label>
+  <div class="scale" id="vig-conf"></div>
+
+  <label class="q">In your judgement, how much is riding on this decision?</label>
+  <div class="scale" id="vig-stakes"></div>
+
+  <label class="q">Before acting, would you ask for additional data or checks?</label>
+  <div id="vig-verify"></div>
+
+  <div id="vig-attn"></div>
+  <div id="vig-mcq"></div>
+
+  <div class="warn" id="w-vig">Please answer every question on this page.</div>
+  <div class="nav"><span></span><button class="btn" onclick="submitVignette()">Next</button></div>
+</section>
+
+<!-- ============================================ 5. CHECKS -->
+<section class="step card" id="s-checks">
+  <h2>Two last questions about the situations</h2>
+  <label class="q">C1. Across the eight situations, in how many did the dashboard carry a notice about the
+    quality or the age of the data behind it?</label>
+  <div id="ck-count"></div>
+
+  <label class="q">C2. In your own words, what do you think this study was trying to find out?</label>
+  <p class="muted">A single sentence is enough. There is no right answer.</p>
+  <textarea id="ck-guess"></textarea>
+
+  <label class="q">C3. Did you notice any pattern in how the eight situations were put together?</label>
+  <div id="ck-pattern"></div>
+
+  <div class="warn" id="w-checks">Please answer questions C1 and C3.</div>
+  <div class="nav"><span></span><button class="btn" onclick="submitChecks()">Continue</button></div>
+</section>
+
+<!-- ============================================ 6. DEMOGRAPHICS -->
+<section class="step card" id="s-demo">
+  <h2>About you and your organisation</h2>
+  <p class="muted">These are used only to describe the sample. Please do not name your employer.</p>
+
+  <label class="q">D1. Which sector best describes your organisation?</label>
+  <select id="d-sector"><option value="">Please choose</option></select>
+
+  <label class="q">D2. How many years have you worked in a managerial or analytical role?</label>
+  <select id="d-exp"><option value="">Please choose</option></select>
+
+  <label class="q">D3. Which best describes your level of seniority?</label>
+  <select id="d-sen"><option value="">Please choose</option></select>
+
+  <label class="q">D4. Roughly how many people work in your organisation?</label>
+  <select id="d-size"><option value="">Please choose</option></select>
+
+  <label class="q">D5. How would you rate your own familiarity with data analytics?</label>
+  <div class="scale" id="d-fam"></div>
+
+  <label class="q">D6. In your organisation, is there a formal way to record a disagreement with a report or
+    system output, so that it becomes part of the record?</label>
+  <div id="d-dissent"></div>
+
+  <label class="q">D7. Would you be willing to answer a short written interview about how dashboards
+    are used where you work?</label>
+  <p class="muted">This is optional. It is twelve open questions and eight rating statements, about
+  fifteen minutes, typed in your own words. There is no call and no recording.</p>
+  <div id="d-follow"></div>
+
+  <div id="d-follow-yes" hidden>
+    <label class="q">D8. Would you like to do it now, or later?</label>
+    <p class="muted">No contact details are collected. If you choose later, the next page gives you a
+    reference and an email address, and you write to me when it suits you.</p>
+    <div id="d-timing"></div>
+  </div>
+
+  <div class="warn" id="w-demo">Please answer questions D1 to D6.</div>
+  <div class="nav"><span></span><button class="btn" onclick="finish()">Submit</button></div>
+</section>
+
+<!-- ======================================= 7. WRITTEN INTERVIEW -->
+<section class="step card" id="s-ivintro">
+  <h2>The written interview</h2>
+  <p>Thank you for agreeing to this part. It is a written interview, so there is no call to attend
+  and nothing is recorded. You answer in your own words by typing, and a few sentences per question
+  is plenty.</p>
+
+  <h3>What it is about</h3>
+  <p>I am studying how managers and analysts use business intelligence dashboards when the screen and
+  the situation on the ground do not agree. I am interested in what actually happens in
+  organisations, including the occasions when nothing happens at all. There are no right answers and
+  I am not assessing you or your employer.</p>
+
+  <h3>How long it takes</h3>
+  <p>About fifteen minutes. Twelve open questions, eight rating statements and a few background
+  details. You may skip any question.</p>
+
+  <h3>Anonymity, and one thing I must ask of you</h3>
+  <p>Your name and your employer's name will not appear anywhere in the dissertation. You will be
+  referred to by a code such as W07 and by sector only, for example "third party logistics".
+  <b>Please do not type any confidential, client or commercially sensitive information.</b> Describe
+  the situation in general terms instead.</p>
+
+  <h3>Withdrawing</h3>
+  <p class="muted">Taking part is voluntary. You may stop at any point by closing the page, and you
+  may withdraw your answers up to the withdrawal date by emailing me. You do not have to give a
+  reason.</p>
+
+  <div class="nav"><span></span><button class="btn" onclick="go('s-ivconsent')">Continue</button></div>
+</section>
+
+<section class="step card" id="s-ivconsent">
+  <h2>Consent for the written interview</h2>
+  <p>You have already agreed to take part, to your answers being anonymised and reported only in
+  aggregate, and to stopping whenever you wish. Those still stand and are not asked again.</p>
+  <p class="muted">The written interview adds three things, because it records your own words rather
+  than a choice from a list. Please confirm each one.</p>
+  <label class="opt selectall"><input type="checkbox" id="ivcons-all" onchange="toggleAllIvConsent(this)"><span>Select all three statements</span></label>
+  <div id="iv-consent"></div>
+  <div class="warn" id="w-ivconsent">Please confirm all three statements to continue.</div>
+  <div class="nav"><button class="btn ghost" onclick="go('s-ivintro')">Back</button>
+    <button class="btn" onclick="checkIvConsent()">Continue</button></div>
+</section>
+
+<section class="step card" id="s-ivabout">
+  <h2>A few background details</h2>
+  <p class="muted">These describe the group of people who took part. Nothing here identifies you.
+  The last three are optional. What you already told me in the survey is not asked again.</p>
+  <div id="iv-about"></div>
+  <div class="warn" id="w-ivabout">Please answer the questions that are not marked optional.</div>
+  <div class="nav"><button class="btn ghost" onclick="go('s-ivconsent')">Back</button>
+    <button class="btn" onclick="submitIvAbout()">Continue</button></div>
+</section>
+
+<section class="step card" id="s-ivq">
+  <div class="counter" id="iv-qcount"></div>
+  <h2>The questions</h2>
+  <p class="muted">A guide to the level of detail I am after, using a made up example: "The screen
+  said the site scored 87 and was green. I know that counter has been down since May, so the footfall
+  number was old. I said so on the Monday call. I was told the number is the number. We opened the
+  store anyway and it is trading below plan." Roughly that much, per question. You may skip any
+  question.</p>
+  <div id="iv-questions"></div>
+  <div class="nav"><button class="btn ghost" id="iv-back" onclick="ivQuestionPage(-1)">Back</button>
+    <button class="btn" id="iv-next" onclick="ivQuestionPage(1)">Next</button></div>
+</section>
+
+<section class="step card" id="s-ivrate">
+  <h2>Rating statements</h2>
+  <p class="muted">Eight statements. 1 means you strongly disagree, 4 means you neither agree nor
+  disagree, 7 means you strongly agree. Please answer for your own organisation as it is today. If a
+  statement does not apply to you, leave it blank.</p>
+  <div id="iv-ratings"></div>
+  <div class="nav"><button class="btn ghost" onclick="ivBackToQuestions()">Back</button>
+    <button class="btn" onclick="finishInterview()">Submit the interview</button></div>
+</section>
+
+<!-- ============================================ 7b. INTERVIEW LATER -->
+<section class="step card" id="s-ivlater">
+  <h2>Thank you, and here is how to pick it up later</h2>
+  <div class="done">
+    <p>Your survey responses have been recorded. Because no contact details are collected, the
+    written interview cannot be sent to you automatically. To do it in your own time, email
+    <b><span class="ivmail"></span></b> quoting your reference <b><span class="ivref"></span></b>,
+    and I will send you the workbook.</p>
+    <p class="muted">Please write the reference down or keep this page open long enough to copy it.
+    It is the only thing that links your survey answers to your written ones, and I have no way of
+    looking it up for you.</p>
+    <p class="muted">If you change your mind, simply do not write. Nothing further is needed.</p>
+  </div>
+  <div class="nav"><span></span><button class="btn" onclick="go('s-end')">See the debrief</button></div>
+</section>
+
+<!-- ============================================ 7. DEBRIEF -->
+<section class="step card" id="s-end">
+  <h2>Thank you, and what this study was really testing</h2>
+  <div class="done">
+    <p><b>The scenarios were built so that the dashboard could mislead you.</b> In each situation the
+    screen pointed one way and the brief contained a piece of local knowledge pointing the other way. In
+    four of the eight the screen also carried a notice that the underlying data were unreliable. In the
+    other four the same fault was present but was not shown.</p>
+    <p>Whether the decision would be recorded against the system or recorded as your own judgement was
+    also varied deliberately, four situations each way.</p>
+    <p>Following the dashboard was a reasonable thing to do. The study is not measuring whether you were
+    right. It is measuring whether the <b>conditions</b> around a decision change how managers behave.
+    Nobody is scored and nothing is reported at an individual level.</p>
+  </div>
+  <h3>Your responses</h3>
+  <div id="save-status" class="savebox">&nbsp;</div>
+  <p class="muted">A copy is shown below in CSV form. You may download it for your own records using
+  the button at the bottom of this page.</p>
+  <textarea id="out" style="min-height:150px;font-family:ui-monospace,Consolas,monospace;font-size:11.5px"></textarea>
+  <p class="muted">If you would like your data removed, quote your response ID
+  <b><span id="rid"></span></b> in an email within two weeks.</p>
+  <div class="nav"><span></span><button class="btn" onclick="downloadCsv()">Download my responses (CSV)</button></div>
+</section>
+
+</div>
+
+<script src="schema.js"></script>
+<script src="config.js"></script>
+<script>
+/* ============================================================ STATE
+
+   DESIGN. Two factors, both fully within participant:
+     data_signal    hidden | visible   (data quality notice suppressed or shown)
+     accountability auditable | own    (decision reviewed against the system or not)
+   Four cells, each seen twice, so eight vignettes per participant.
+
+   Risk is NOT manipulated. All eight scenarios are written at comparable
+   stakes and perceived stakes is measured after each one instead.
+
+   LATIN SQUARE. Scenario j (0..7) is assigned condition (j + VERSION) mod 4.
+   Every version gives each participant two vignettes per cell, and across the
+   four versions every scenario appears in every cell exactly once. Scenario is
+   therefore orthogonal to condition and can be entered in the model.
+   ------------------------------------------------------------------- */
+const RID = 'R' + Math.random().toString(36).slice(2, 8).toUpperCase();
+const VERSION = Math.floor(Math.random() * 4);
+
+const COND = [
+  {signal:'hidden',  acc:'auditable'},
+  {signal:'hidden',  acc:'own'},
+  {signal:'visible', acc:'auditable'},
+  {signal:'visible', acc:'own'}
+];
+
+const ATTN_POS = [2, 5];   /* presentation positions, zero indexed */
+const N_OPEN   = 3;        /* open-ended item asked on this many vignettes */
+
+const state = {
+  response_id: RID,
+  version: VERSION,
+  started: new Date().toISOString(),
+  t_start: Date.now(),
+  screen: {}, demo: {}, checks: {}, rows: [],
+  attn_pass: 0, attn_total: 0, mc_immediate_correct: ''
+};
+/* ============================================================ SCENARIOS
+   Eight decision scenarios, written at comparable stakes so that risk is
+   held constant rather than manipulated. Order in this array is the Latin
+   square index j = 0..7. Each carries one dashboard, one brief containing
+   local knowledge that contradicts the screen, and one data quality notice
+   that is shown only in the visible condition.
+   ------------------------------------------------------------------- */
+const SC = [
+{
+  key:'kovai',
+  q10about:'choosing where to open the next store', q10screen:'the site scored 87 and should be opened next quarter', q10local:'the footfall counter at that site had been offline for 47 days', sector:'Retail',
+  dashTitle:'Kovai Footwear &nbsp;|&nbsp; Store Network Performance',
+  chips:['Region: All','Period: last 90 days'],
+  kpis:[['Net revenue (90 days)','₹ 18.4 cr','6.2% vs LY',1],
+        ['Footfall','4.21 lakh','11.0% vs LY',1],
+        ['Conversion rate','21.4%','0.8 pp vs LY',0],
+        ['Sales per sq ft','₹ 1,240','4.1% vs LY',1]],
+  paneA:{h:'Expansion shortlist · by Site Score', cols:['Candidate town','Site Score','Action'],
+    rows:[['Tiruppur','87','Open Q3','#4A7C59',1],['Salem','74','Watch','#D99A2B',0],
+          ['Erode','71','Watch','#D99A2B',0],['Thrissur','63','Hold','#B5453F',0],
+          ['Kollam','58','Hold','#B5453F',0]]},
+  paneB:{h:'Footfall growth vs last year', src:'Source: footfall counters, nightly extract',
+    rows:[['Tiruppur',100,'hero'],['Salem',61,''],['Erode',52,''],['Thrissur',28,''],['Kollam',21,'']]},
+  notice:'Footfall feed: 3 of 22 counters are not reporting. The Tiruppur counter has been offline since 12 May, that is 47 days. The Site Score for Tiruppur is computed on a carried-forward reading.',
+  title:'Opening the next store',
+  brief:`You are the regional manager of <b>Kovai Footwear</b>, a chain of 22 shoe stores. You must
+    recommend the location of store 23. The screen ranks Tiruppur first with a Site Score of 87 and the
+    recommendation "Open Q3".<br><br>
+    <b>What else you know:</b> Meena, the area sales officer who visits Tiruppur every week, told you
+    yesterday that the crowd near the proposed site is bus-stand traffic passing through rather than
+    shoppers, and that two nearby retailers have already cut prices.<br><br>
+    <b>Stakes:</b> the fit-out costs ₹1.4 crore and the lease runs for nine years.`,
+  q:'What would you recommend?',
+  options:[
+    {t:'Recommend Tiruppur for Q3, as the Site Score indicates.', k:'dashboard'},
+    {t:'Hold Tiruppur and commission a two-week manual footfall and conversion check at the site.', k:'correct'},
+    {t:'Recommend Tiruppur but open one quarter later, in Q4.', k:'partial'},
+    {t:'Recommend the second-ranked town, Salem, instead.', k:'other'}]
+},
+{
+  key:'freight',
+  q10about:'a delivery route reporting itself as on target', q10screen:'the route was at 96 per cent on time and needed no action', q10local:'the depot supervisor had reported loads arriving without paperwork', sector:'Logistics',
+  dashTitle:'Vaishnavi Distribution &nbsp;|&nbsp; Service Performance',
+  chips:['Route: Western','Period: month to date'],
+  kpis:[['On-time delivery','96.0%','1.2 pp vs LM',1],
+        ['Loads delivered','1,284','3.0% vs LM',1],
+        ['Average dwell time','41 min','6 min vs LM',2],
+        ['Service credits','₹ 0','no breach',4]],
+  paneA:{h:'Route performance · this month', cols:['Route','On time','Status'],
+    rows:[['Western','96.0%','On track','#4A7C59',1],['Northern','93.4%','On track','#4A7C59',0],
+          ['Southern','91.8%','On track','#4A7C59',0],['Eastern','88.1%','Watch','#D99A2B',0],
+          ['Central','86.5%','Watch','#D99A2B',0]]},
+  paneB:{h:'Western route, weekly on-time trend', src:'Source: depot inbound scans, hourly feed',
+    rows:[['Wk 1',88,''],['Wk 2',91,''],['Wk 3',94,''],['Wk 4',100,'hero']]},
+  notice:'Inbound scan feed from the Nashik depot last received data 6 days ago. About 12 per cent of expected arrival records are missing from this period.',
+  title:'A route that reports itself as green',
+  brief:`You manage regional distribution for a consumer goods firm. The service dashboard shows
+    the Western route at 96 per cent on-time and marked green, with no action required.<br><br>
+    <b>What else you know:</b> the depot supervisor at Nashik has phoned twice this week to say that
+    three of the last five inbound loads arrived without their paperwork and had to be held. He is not
+    sure the arrivals are being recorded correctly.<br><br>
+    <b>Stakes:</b> the customer is your largest account and the contract carries a service-level penalty
+    of ₹18 lakh per breach month.`,
+  q:'What would you do?',
+  options:[
+    {t:'Take no action. The route is green and within service level.', k:'dashboard'},
+    {t:'Ask for a manual reconciliation of inbound arrivals against paperwork at Nashik before deciding.', k:'correct'},
+    {t:'Ask the supervisor to email a written summary and review it at the monthly meeting.', k:'partial'},
+    {t:'Authorise expedited freight for the next two weeks as a precaution.', k:'other'}]
+},
+{
+  key:'fraud',
+  q10about:'a fraud review queue that had gone quiet', q10screen:'the queue was clear and the ageing indicator was green', q10local:'two analysts had had almost nothing to review since a weekend release', sector:'Financial services',
+  dashTitle:'Setu Payments &nbsp;|&nbsp; Fraud Operations Monitor',
+  chips:['Queue: Review','Period: last 7 days'],
+  kpis:[['Open cases','11','88% vs LW',2],
+        ['Oldest case age','4 h','within SLA',4],
+        ['Cases closed','96','12% vs LW',1],
+        ['Confirmed loss','₹ 2.1 lakh','19% vs LW',2]],
+  paneA:{h:'Review queue by case type', cols:['Case type','Open','Ageing'],
+    rows:[['Card not present','4','Clear','#4A7C59',1],['Account takeover','3','Clear','#4A7C59',0],
+          ['Merchant collusion','2','Clear','#4A7C59',0],['Refund abuse','1','Clear','#4A7C59',0],
+          ['Other','1','Clear','#4A7C59',0]]},
+  paneB:{h:'Daily case intake, this week', src:'Source: case management system, live',
+    rows:[['Mon',100,''],['Tue',94,''],['Wed',31,''],['Thu',13,''],['Fri',9,'stale']]},
+  notice:'Case intake from the scoring service fell to zero at 02:10 on Saturday. No new intake records have been written since the weekend release.',
+  title:'A queue that has gone quiet',
+  brief:`You run an operations team at a payments firm. The monitoring screen shows the fraud
+    review queue at 11 cases, well below the usual 90 to 120, and the ageing indicator is green.<br><br>
+    <b>What else you know:</b> two analysts have mentioned that they have had very little to review since
+    Monday, and one of them thinks the intake rule was changed during last weekend's release.<br><br>
+    <b>Stakes:</b> if genuine fraud is passing unreviewed, the firm carries the loss and must notify the
+    regulator.`,
+  q:'What would you do?',
+  options:[
+    {t:'Report the improvement. The queue is clear and the indicator is green.', k:'dashboard'},
+    {t:'Hold the report and ask engineering to confirm the intake rule is still routing cases correctly.', k:'correct'},
+    {t:'Note the drop in the weekly report and continue monitoring.', k:'partial'},
+    {t:'Reassign two analysts to another queue while volumes are low.', k:'other'}]
+},
+{
+  key:'supplier',
+  q10about:'renewing a supplier at increased volume', q10screen:'the supplier scored 98.6 per cent and should be renewed at higher volume', q10local:'the inspector had been passing batches by eye because the test rig was out of calibration', sector:'Manufacturing',
+  dashTitle:'Anand Components &nbsp;|&nbsp; Supplier Scorecard',
+  chips:['Category: Castings','Period: this quarter'],
+  kpis:[['Quality acceptance','98.6%','1.4 pp vs LQ',1],
+        ['On-time supply','97.2%','0.6 pp vs LQ',1],
+        ['Cost variance','−2.8%','favourable',4],
+        ['Open defect reports','0','2 vs LQ',2]],
+  paneA:{h:'Supplier ranking · composite score', cols:['Vendor','Score','System action'],
+    rows:[['Vendor K','98.6','Renew, increase','#4A7C59',1],['Vendor M','96.9','Renew','#4A7C59',0],
+          ['Vendor P','94.1','Renew','#4A7C59',0],['Vendor R','89.7','Review','#D99A2B',0],
+          ['Vendor T','85.2','Review','#D99A2B',0]]},
+  paneB:{h:'Vendor K acceptance rate by quarter', src:'Source: incoming inspection system',
+    rows:[['Q1',92,''],['Q2',95,''],['Q3',97,''],['Q4',100,'hero']]},
+  notice:'Quality results for Vendor K have not changed since 4 April. The inbound test rig has not written a new calibration record in 11 weeks.',
+  title:'A supplier scorecard',
+  brief:`You are a category manager. The supplier scorecard shows Vendor K at 98.6 per cent quality
+    acceptance for the quarter, ranked first, and the system recommends renewing at increased volume.<br><br>
+    <b>What else you know:</b> the incoming quality inspector told you last week that he has been passing
+    Vendor K's batches on a visual check because the test rig has been out of calibration since April,
+    and that he flagged this to maintenance twice.<br><br>
+    <b>Stakes:</b> Vendor K supplies the safety-critical component in your best-selling product line, and
+    the renewal doubles the volume.`,
+  q:'What would you do?',
+  options:[
+    {t:'Renew at increased volume, as the scorecard recommends.', k:'dashboard'},
+    {t:'Hold the renewal until the test rig is recalibrated and a sample of batches is retested.', k:'correct'},
+    {t:'Renew at the current volume rather than increasing it.', k:'partial'},
+    {t:'Move volume to the second-ranked supplier instead.', k:'other'}]
+},
+{
+  key:'ward',
+  q10about:'cutting a hospital night shift', q10screen:'admissions would fall 22 per cent and the shift could drop from six nurses to four', q10local:'the ward sister said the feeder clinics were sending patients as usual', sector:'Healthcare',
+  dashTitle:'Meridian Health &nbsp;|&nbsp; Ward 4 Demand and Staffing',
+  chips:['Ward: 4 (post-operative)','Period: next 7 nights'],
+  kpis:[['Predicted admissions','38','22% vs LW',2],
+        ['Bed occupancy','71%','6 pp vs LW',2],
+        ['Nursing hours per patient','5.8','0.4 vs LW',1],
+        ['Agency spend','₹ 2.1 lakh','31% vs LW',2]],
+  paneA:{h:'Rota recommendation · next 7 nights', cols:['Night','Predicted','Nurses'],
+    rows:[['Monday','5','4 (from 6)','#4A7C59',1],['Tuesday','6','4','#4A7C59',0],
+          ['Wednesday','5','4','#4A7C59',0],['Thursday','4','4','#4A7C59',0],
+          ['Friday','6','4','#4A7C59',0]]},
+  paneB:{h:'Predicted admissions, last 6 weeks', src:'Source: referral and admissions feed, nightly',
+    rows:[['Wk 1',100,''],['Wk 2',94,''],['Wk 3',88,''],['Wk 4',61,''],['Wk 5',44,''],['Wk 6',31,'stale']]},
+  notice:'The referral feed from the two feeder clinics has returned no records since the clinic system upgrade on 3 June. Predicted admissions are computed on the remaining sources only.',
+  title:'The night rota',
+  brief:`You are the nursing operations manager at <b>Meridian Health</b>, a 240-bed hospital. The rota
+    system predicts a 22 per cent fall in admissions on Ward 4 and recommends cutting the night shift
+    from six nurses to four for the coming week.<br><br>
+    <b>What else you know:</b> the ward sister told you on Friday that the two feeder clinics have been
+    sending patients as usual, and that last Tuesday night the ward took nine unplanned admissions with
+    the existing six nurses.<br><br>
+    <b>Stakes:</b> Ward 4 takes post-operative patients, and a shortfall on a night shift is reportable.`,
+  q:'What would you do?',
+  options:[
+    {t:'Cut the night shift to four nurses for the coming week, as the rota system recommends.', k:'dashboard'},
+    {t:'Hold the rota at six and ask the rota team to confirm the referral feed from both clinics is still arriving.', k:'correct'},
+    {t:'Cut to five nurses rather than four, and review again mid-week.', k:'partial'},
+    {t:'Keep six nurses and find the saving elsewhere in the ward budget.', k:'other'}]
+},
+{
+  key:'pricing',
+  q10about:'filing a price increase', q10screen:'every tracked competitor sat above you and a 7 per cent rise was safe', q10local:'your sales head had photographed a rival selling below you on promotion', sector:'Consumer goods',
+  dashTitle:'Aravind Foods &nbsp;|&nbsp; Price Optimisation — Cooking Oil 1L',
+  chips:['SKU: 1L pack','Period: this quarter'],
+  kpis:[['Recommended price','₹ 186','7.0% increase',1],
+        ['Price elasticity','−0.42','low sensitivity',4],
+        ['Forecast margin','₹ 4.1 cr','9.3% vs LQ',1],
+        ['Volume at risk','2.1%','low',4]],
+  paneA:{h:'Competitor shelf price · latest capture', cols:['Retailer','Price','Position'],
+    rows:[['Own brand','₹ 174','Benchmark','#4A7C59',1],['Rival A','₹ 191','Above us','#4A7C59',0],
+          ['Rival B','₹ 188','Above us','#4A7C59',0],['Rival C','₹ 183','Above us','#4A7C59',0],
+          ['Private label','₹ 169','Below us','#D99A2B',0]]},
+  paneB:{h:'Modelled volume index by price point', src:'Source: competitor price capture, daily crawl',
+    rows:[['₹ 174',100,''],['₹ 180',98,''],['₹ 186',96,'hero'],['₹ 192',88,''],['₹ 198',74,'']]},
+  notice:'Competitor price capture last refreshed 22 days ago. The collection job for three of the five retailers has failed on every run since 7 June.',
+  title:'Filing a price increase',
+  brief:`You are the category manager for edible oils at <b>Aravind Foods</b>. The pricing engine
+    recommends raising the shelf price of the one-litre pack by 7 per cent, from ₹174 to ₹186, on the
+    basis that measured elasticity is low and every tracked competitor sits above you.<br><br>
+    <b>What else you know:</b> your regional sales head sent a photograph on Wednesday from a store in
+    Madurai showing Rival A at ₹169 on a promotion that started three weeks ago, and says two other
+    chains have followed.<br><br>
+    <b>Stakes:</b> the pack is 31 per cent of category volume and the price is fixed for the quarter once
+    it is filed with the trade.`,
+  q:'What would you do?',
+  options:[
+    {t:'File the 7 per cent increase, as the pricing engine recommends.', k:'dashboard'},
+    {t:'Hold the increase until the competitor price capture is re-run and checked against store visits.', k:'correct'},
+    {t:'File a smaller increase of 3 per cent instead.', k:'partial'},
+    {t:'Hold the price and raise trade promotion spend for the quarter.', k:'other'}]
+},
+{
+  key:'retention',
+  q10about:'moving specialists off customer retention', q10screen:'only six accounts were at risk and three specialists could be reassigned', q10local:'an account manager said two of the largest customers had gone quiet', sector:'Technology',
+  dashTitle:'Northbridge Software &nbsp;|&nbsp; Account Health and Renewal',
+  chips:['Segment: Enterprise','Period: this quarter'],
+  kpis:[['Accounts at risk','6','64% vs LQ',2],
+        ['Predicted net retention','104%','3 pp vs LQ',1],
+        ['Average health score','82','5 vs LQ',1],
+        ['Save-team utilisation','34%','21 pp vs LQ',2]],
+  paneA:{h:'Largest accounts · health and renewal', cols:['Account','Health','System action'],
+    rows:[['Account 1','91','Auto-renew','#4A7C59',1],['Account 2','88','Auto-renew','#4A7C59',0],
+          ['Account 3','86','Auto-renew','#4A7C59',0],['Account 4','84','Auto-renew','#4A7C59',0],
+          ['Account 5','79','Monitor','#D99A2B',0]]},
+  paneB:{h:'Accounts flagged at risk, last 6 months', src:'Source: product usage events and health model',
+    rows:[['Feb',100,''],['Mar',92,''],['Apr',77,''],['May',61,''],['Jun',38,''],['Jul',35,'stale']]},
+  notice:'Product usage events have not been received from the web application since the 14 June release. Health scores are computed on the last complete week of event data.',
+  title:'Moving the save team',
+  brief:`You lead customer success at <b>Northbridge Software</b>. The account health dashboard shows
+    only six accounts at risk, down from seventeen last quarter, and recommends moving three of your five
+    save-team specialists onto new-customer onboarding.<br><br>
+    <b>What else you know:</b> an account manager told you on Monday that two of your six largest
+    customers have gone quiet since June, and that one of them has asked for a full export of their
+    data.<br><br>
+    <b>Stakes:</b> those six accounts are 44 per cent of recurring revenue and all six renew in the same
+    quarter.`,
+  q:'What would you do?',
+  options:[
+    {t:'Move the three specialists to onboarding, as the dashboard recommends.', k:'dashboard'},
+    {t:'Hold the reassignment and ask engineering to confirm usage events are still reaching the health model.', k:'correct'},
+    {t:'Move one specialist rather than three, and review again next month.', k:'partial'},
+    {t:'Keep the team in place and commission a customer satisfaction survey.', k:'other'}]
+},
+{
+  key:'kiln',
+  q10about:'deferring a plant shutdown', q10screen:'the line was healthy and the shutdown could be deferred to December', q10local:'the shift engineer had reported knocking from a mill whose sensor was never calibrated', sector:'Industrial',
+  dashTitle:'Coromandel Cement &nbsp;|&nbsp; Plant Reliability — Line 2',
+  chips:['Line: 2','Period: last 12 weeks'],
+  kpis:[['Equipment health index','94','3 vs LQ',1],
+        ['Mill 2 vibration','2.1 mm/s','within limit',4],
+        ['Unplanned stoppages','0','2 vs LQ',2],
+        ['Budget released if deferred','₹ 3.6 cr','this year',4]],
+  paneA:{h:'Asset condition · Line 2', cols:['Asset','Reading','Status'],
+    rows:[['Mill 2','2.1 mm/s','Normal','#4A7C59',1],['Mill 1','4.8 mm/s','Normal','#4A7C59',0],
+          ['Kiln drive','3.9 mm/s','Normal','#4A7C59',0],['Cooler fan','5.2 mm/s','Watch','#D99A2B',0],
+          ['Preheater','3.1 mm/s','Normal','#4A7C59',0]]},
+  paneB:{h:'Mill 2 vibration, last 12 weeks', src:'Source: condition monitoring, continuous',
+    rows:[['Wk 1-3',35,'stale'],['Wk 4-6',35,'stale'],['Wk 7-9',35,'stale'],['Wk 10-12',35,'stale']]},
+  notice:'The Mill 2 vibration sensor has reported an identical value on every reading since it was replaced on 19 March. The channel has not been re-ranged since installation.',
+  title:'Deferring the shutdown',
+  brief:`You are the plant reliability manager at <b>Coromandel Cement</b>. The condition-monitoring
+    system puts the Line 2 health index at 94 and recommends deferring the planned shutdown from
+    September to December, releasing ₹3.6 crore of maintenance budget in this financial year.<br><br>
+    <b>What else you know:</b> the shift engineer reported an intermittent knocking sound from mill 2
+    twice last month, and the fitter who replaced its vibration sensor in March said he was not able to
+    complete the calibration.<br><br>
+    <b>Stakes:</b> an unplanned failure on Line 2 takes the plant down for about three weeks in the peak
+    season.`,
+  q:'What would you do?',
+  options:[
+    {t:'Defer the shutdown to December, as the health index supports.', k:'dashboard'},
+    {t:'Hold the decision and have mill 2 checked with a handheld vibration meter before the budget is released.', k:'correct'},
+    {t:'Defer the shutdown but bring the next inspection of mill 2 forward by one month.', k:'partial'},
+    {t:'Keep the September shutdown and reduce its scope to save cost.', k:'other'}]
+}
+];
+
+/* ================================================== dashboard renderer */
+/* Delta states, so that the arrow always matches the direction of travel and
+   the colour carries the dashboard's own judgement of whether that is good:
+     1 rise, favourable   0 fall, unfavourable
+     2 fall, favourable   3 rise, unfavourable   4 no movement shown */
+const DELTA = { 0:['▼','down'], 1:['▲','up'], 2:['▼','up'], 3:['▲','down'], 4:['','flat'] };
+function kpi(lab, val, d, st) {
+  const m = DELTA[st] || DELTA[1];
+  return `<div class="kpi"><div class="lab">${lab}</div><div class="val">${val}</div>
+          <div class="d ${m[1]}">${m[0] ? m[0] + ' ' : ''}${d}</div></div>`;
+}
+function bar(pct, cls) { return `<span class="bar ${cls||''}" style="width:${pct}%"></span>`; }
+function dot(c) { return `<span class="dot" style="background:${c}"></span>`; }
+
+function renderDash(s, cond) {
+  const banner = cond.signal === 'visible'
+    ? `<div class="banner"><b>Data quality notice.</b> ${s.notice}</div>` : '';
+  const k = s.kpis.map(x => kpi(x[0], x[1], x[2], x[3])).join('');
+  const rowsA = s.paneA.rows.map(r =>
+    `<tr class="${r[4] ? 'hl' : ''}"><td>${r[0]}</td><td>${r[1]}</td><td>${dot(r[3])}${r[2]}</td></tr>`).join('');
+  const rowsB = s.paneB.rows.map(r =>
+    `<tr><td style="width:38%">${r[0]}</td><td>${bar(r[1], r[2])}</td></tr>`).join('');
+  return `<div class="frame">
+      <div class="fbar"><span>${s.dashTitle}</span>
+        <span>${s.chips.map(c => `<span class="chip">${c}</span>`).join(' ')}</span></div>
+      ${banner}
+      <div class="kpis">${k}</div>
+      <div class="grid2">
+        <div class="pane"><h4>${s.paneA.h}</h4>
+          <table class="dash"><tr>${s.paneA.cols.map(c => `<th>${c}</th>`).join('')}</tr>${rowsA}</table></div>
+        <div class="pane"><h4>${s.paneB.h}</h4>
+          <table class="dash">${rowsB}</table><div class="src">${s.paneB.src}</div></div>
+      </div></div>`;
+}
+
+/* ============================================================ helpers */
+function radios(container, name, items) {
+  document.getElementById(container).innerHTML = items.map((t, i) =>
+    `<label class="opt"><input type="radio" name="${name}" value="${i}"><span>${t}</span></label>`).join('');
+}
+function fillSelect(id, items) {
+  const s = document.getElementById(id);
+  items.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; s.appendChild(o); });
+}
+function scale(container, name, lo, hi, n) {
+  const el = document.getElementById(container); el.innerHTML = '';
+  for (let i = 1; i <= n; i++) {
+    const lab = i === 1 ? lo : (i === n ? hi : i);
+    el.insertAdjacentHTML('beforeend',
+      `<label><input type="radio" name="${name}" value="${i}">${lab}</label>`);
+  }
+}
+function picked(name) { const e = document.querySelector(`input[name="${name}"]:checked`); return e ? e.value : null; }
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+/* ======================================================= step handling */
+let stepOrder = ['s-info','s-consent','s-screen','s-howto','s-vig','s-checks','s-demo','s-end'];
+function go(id) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const i = Math.max(0, stepOrder.indexOf(id));
+  document.getElementById('pbar').style.width = Math.round(100 * i / (stepOrder.length - 1)) + '%';
+}
+function vigProgress() {
+  const base = stepOrder.indexOf('s-vig');
+  const frac = (base + (qi / queue.length)) / (stepOrder.length - 1);
+  document.getElementById('pbar').style.width = Math.round(100 * frac) + '%';
+}
+
+radios('sc-freq', 'freq', ['Daily', 'Several times a week', 'About once a week',
+  'Once or twice a month', 'Rarely or never']);
+radios('sc-role', 'role', ['Manager with budget or people responsibility',
+  'Analyst or specialist supporting decisions', 'Senior leader or director',
+  'Individual contributor without decision responsibility', 'Student, or not currently working']);
+
+function toggleAllConsent(box) {
+  document.querySelectorAll('.cons').forEach(c => { c.checked = box.checked; });
+  if (box.checked) document.getElementById('w-consent').style.display = 'none';
+}
+function syncConsent() {
+  const all = [...document.querySelectorAll('.cons')].every(c => c.checked);
+  document.getElementById('cons-all').checked = all;
+}
+function checkConsent() {
+  const all = [...document.querySelectorAll('.cons')].every(c => c.checked);
+  document.getElementById('w-consent').style.display = all ? 'none' : 'block';
+  if (all) go('s-screen');
+}
+function checkScreen() {
+  const f = picked('freq'), r = picked('role');
+  if (f === null || r === null) { document.getElementById('w-screen').style.display = 'block'; return; }
+  document.getElementById('w-screen').style.display = 'none';
+  const freqTxt = ['Daily','Several times a week','About once a week','Once or twice a month','Rarely or never'][+f];
+  const roleTxt = ['Manager with budget or people responsibility','Analyst or specialist supporting decisions',
+    'Senior leader or director','Individual contributor without decision responsibility',
+    'Student, or not currently working'][+r];
+  state.screen = { use_frequency: freqTxt, role: roleTxt };
+  if (+f > 2 || +r > 2) { stepOrder = ['s-info','s-consent','s-screen','s-out']; go('s-out'); return; }
+  go('s-howto');
+}
+
+/* ========================================================== vignettes */
+let queue = [], qi = 0, t0 = 0, openPos = [];
+
+function startVignettes() {
+  queue = SC.map((s, j) => ({ j: j, s: s, cond: COND[(j + VERSION) % 4] }));
+  shuffle(queue);
+  openPos = shuffle([0,1,2,3,4,5,6,7]).slice(0, N_OPEN);
+  qi = 0;
+  go('s-vig');
+  renderVignette();
+}
+
+function renderVignette() {
+  const item = queue[qi], s = item.s, c = item.cond;
+  t0 = Date.now();
+
+  document.getElementById('vig-count').textContent = `Situation ${qi + 1} of ${queue.length}`;
+  document.getElementById('vig-title').textContent = s.title;
+
+  document.getElementById('vig-tags').innerHTML = c.acc === 'auditable'
+    ? '<span class="tag aud"><b>RECORDED AGAINST THE SYSTEM.</b> Your decision will be logged next to the dashboard recommendation and reviewed at the quarterly governance meeting.</span>'
+    : '<span class="tag"><b>YOUR OWN JUDGEMENT.</b> Your decision is recorded as your own managerial judgement and is not reviewed against the system.</span>';
+
+  document.getElementById('vig-dash').innerHTML = renderDash(s, c);
+
+  const frameLine = c.acc === 'auditable'
+    ? '<span class="frameline">Remember: this decision will be reviewed against what the dashboard recommended.</span>'
+    : '<span class="frameline">Remember: this decision is yours, and will not be reviewed against what the dashboard recommended.</span>';
+  document.getElementById('vig-brief').innerHTML = s.brief + frameLine;
+
+  document.getElementById('q-dec').textContent = s.q;
+  const order = shuffle(s.options.map((o, i) => i));
+  item._order = order;
+  document.getElementById('vig-options').innerHTML = order.map(oi =>
+    `<label class="opt"><input type="radio" name="dec" value="${oi}"><span>${s.options[oi].t}</span></label>`).join('');
+
+  /* open-ended item on a random subset only, to buy vignettes with minutes */
+  const askOpen = openPos.includes(qi);
+  document.getElementById('vig-alts-wrap').style.display = askOpen ? 'block' : 'none';
+  document.getElementById('vig-alts').value = '';
+
+  scale('vig-conf', 'conf', 'Not at all confident', 'Extremely confident', 7);
+  scale('vig-stakes', 'stk', 'Very little', 'A great deal', 7);
+  radios('vig-verify', 'ver', ['Yes, I would ask for more before acting.', 'No, I would act on what I have.']);
+
+  /* instructed-response attention checks */
+  const box = document.getElementById('vig-attn');
+  if (ATTN_POS.includes(qi)) {
+    const want = qi === ATTN_POS[0] ? 1 : 3;
+    const labs = ['Very often', 'Sometimes', 'Rarely', 'Never'];
+    state.attn_total++;
+    box.innerHTML = `<label class="q">To confirm you are reading carefully, please select
+      "${labs[want]}" below.</label><div id="attn-r"></div>`;
+    radios('attn-r', 'attn', labs);
+    box.dataset.correct = String(want);
+  } else { box.innerHTML = ''; box.dataset.correct = ''; }
+
+  /* immediate manipulation check, last vignette only, after the outcome items
+     so that it cannot cue the decision on any earlier trial */
+  const mcq = document.getElementById('vig-mcq');
+  if (qi === queue.length - 1) {
+    mcq.innerHTML = `<label class="q">Thinking only about the situation you have just read: did the
+      dashboard carry a notice about the quality or the age of the data behind it?</label>
+      <div id="mcq-r"></div>`;
+    radios('mcq-r', 'mcq', ['Yes, it did.', 'No, it did not.', 'I do not remember.']);
+    mcq.dataset.correct = c.signal === 'visible' ? '0' : '1';
+  } else { mcq.innerHTML = ''; mcq.dataset.correct = ''; }
+
+  document.getElementById('w-vig').style.display = 'none';
+  document.querySelector('#s-vig .nav .btn').textContent =
+    (qi === queue.length - 1) ? 'Finish the situations' : 'Next';
+  vigProgress();
+}
+
+function submitVignette() {
+  const dec = picked('dec'), conf = picked('conf'), stk = picked('stk'), ver = picked('ver');
+  const box = document.getElementById('vig-attn'), mcq = document.getElementById('vig-mcq');
+  const needAttn = box.dataset.correct !== '', needMcq = mcq.dataset.correct !== '';
+  if (dec === null || conf === null || stk === null || ver === null
+      || (needAttn && picked('attn') === null) || (needMcq && picked('mcq') === null)) {
+    document.getElementById('w-vig').style.display = 'block'; return;
+  }
+
+  const item = queue[qi], s = item.s, c = item.cond, choice = s.options[+dec];
+  const askOpen = openPos.includes(qi);
+  const alts = askOpen
+    ? document.getElementById('vig-alts').value.split('\n').map(x => x.trim())
+        .filter(x => x && !/^none$/i.test(x))
+    : null;
+
+  let attnCorrect = '';
+  if (needAttn) {
+    attnCorrect = picked('attn') === box.dataset.correct ? 1 : 0;
+    if (attnCorrect) state.attn_pass++;
+  }
+  if (needMcq) state.mc_immediate_correct = picked('mcq') === mcq.dataset.correct ? 1 : 0;
+
+  state.rows.push({
+    data_status: 'COLLECTED',
+    response_id: RID,
+    version: VERSION,
+    position: qi + 1,
+    scenario: s.key,
+    scenario_sector: s.sector,
+    data_signal: c.signal,
+    accountability: c.acc,
+    choice_key: choice.k,
+    over_reliance: choice.k === 'dashboard' ? 1 : 0,
+    accuracy: choice.k === 'correct' ? 1 : 0,
+    confidence: +conf,
+    perceived_stakes: +stk,
+    verification_intent: ver === '0' ? 1 : 0,
+    options_asked: askOpen ? 1 : 0,
+    options_generated: askOpen ? alts.length : '',
+    seconds_on_page: Math.round((Date.now() - t0) / 1000),
+    attn_shown: needAttn ? 1 : 0,
+    attn_correct: attnCorrect
+  });
+
+  qi++;
+  if (qi < queue.length) renderVignette();
+  else go('s-checks');
+}
+
+/* ======================================== manipulation and suspicion */
+radios('ck-count', 'ckc', ['0','1','2','3','4','5','6','7','8','I do not know']);
+radios('ck-pattern', 'ckp', ['Yes, I noticed a pattern.', 'No, I did not.']);
+
+function submitChecks() {
+  const cnt = picked('ckc'), pat = picked('ckp');
+  if (cnt === null || pat === null) { document.getElementById('w-checks').style.display = 'block'; return; }
+  document.getElementById('w-checks').style.display = 'none';
+  const cntTxt = +cnt === 9 ? 'do not know' : String(+cnt);
+  state.checks = {
+    mc_count_response: cntTxt,
+    mc_count_correct: (+cnt === 4) ? 1 : 0,
+    suspicion_pattern: pat === '0' ? 1 : 0,
+    suspicion_text: document.getElementById('ck-guess').value.replace(/\s+/g, ' ').trim()
+  };
+  go('s-demo');
+}
+
+/* ====================================================== demographics */
+fillSelect('d-sector', ['Banking and financial services','Retail and consumer goods',
+  'Logistics, transport and supply chain','Manufacturing and industrial',
+  'Technology and software','Consulting and professional services',
+  'Healthcare and life sciences','Energy and utilities','Public sector and government',
+  'Education','Other']);
+fillSelect('d-exp', ['Less than 2 years','2 to 4 years','5 to 9 years','10 to 14 years','15 years or more']);
+fillSelect('d-sen', ['Analyst or executive','Team lead or assistant manager','Manager',
+  'Senior manager or head of function','Director or above']);
+fillSelect('d-size', ['Fewer than 50','50 to 249','250 to 999','1,000 to 4,999','5,000 or more']);
+scale('d-fam', 'fam', 'No familiarity', 'Expert', 5);
+radios('d-dissent', 'dis', ['Yes, there is a formal route and it is used.',
+  'There is a route on paper but it is rarely used.', 'No formal route exists.', 'I do not know.']);
+radios('d-follow', 'fol', ['Yes, I am willing to take part.', 'No, thank you.']);
+radios('d-timing', 'tim', ['I can do it now, it is about fifteen more minutes.',
+                           'Later. Show me how to ask for it.']);
+document.getElementById('d-follow').addEventListener('change', function () {
+  document.getElementById('d-follow-yes').hidden = picked('fol') !== '0';
+});
+
+function finish() {
+  const ids = ['d-sector','d-exp','d-sen','d-size'];
+  const wantsIv = picked('fol') === '0';
+  const timing = picked('tim');
+  const missing = ids.some(i => !document.getElementById(i).value)
+               || picked('fam') === null || picked('dis') === null || picked('fol') === null
+               || (wantsIv && timing === null);
+  if (missing) {
+    document.getElementById('w-demo').textContent = wantsIv
+      ? 'Please answer D1 to D7, and say whether you would like to do the interview now or later.'
+      : 'Please answer questions D1 to D7.';
+    document.getElementById('w-demo').style.display = 'block';
+    return;
+  }
+  document.getElementById('w-demo').style.display = 'none';
+
+  state.demo = {
+    sector: document.getElementById('d-sector').value,
+    experience: document.getElementById('d-exp').value,
+    seniority: document.getElementById('d-sen').value,
+    org_size: document.getElementById('d-size').value,
+    analytics_familiarity: +picked('fam'),
+    dissent_route: +picked('dis'),
+    follow_up: wantsIv ? 1 : 0
+  };
+  state.submitted = new Date().toISOString();
+  state.total_seconds = Math.round((Date.now() - state.t_start) / 1000);
+  document.getElementById('rid').textContent = RID;
+
+  /* The survey goes to the store now, before the interview begins, so that a
+     participant who starts the interview and abandons it still leaves a
+     complete survey record. */
+  saveToServer();
+
+  if (!wantsIv) { document.getElementById('out').value = toCsv(); go('s-end'); return; }
+
+  if (timing === '1') {
+    /* Later. Nothing is stored about them: they are handed their reference and
+       an address, and they write in. No email address is collected anywhere in
+       this study, which is what keeps it anonymous. */
+    document.querySelectorAll('.ivref').forEach(el => { el.textContent = RID; });
+    document.querySelectorAll('.ivmail').forEach(el => { el.textContent = contactEmail(); });
+    document.getElementById('out').value = toCsv();
+    stepOrder = ['s-info','s-consent','s-screen','s-howto','s-vig','s-checks','s-demo','s-ivlater','s-end'];
+    go('s-ivlater');
+  } else {
+    stepOrder = ['s-info','s-consent','s-screen','s-howto','s-vig','s-checks','s-demo',
+                 's-ivintro','s-ivconsent','s-ivabout','s-ivq','s-ivrate','s-end'];
+    startInterview();
+  }
+}
+
+/* ============================================ talking to the Cloudflare Worker
+   The admin key never appears in this page: the instrument only ever writes.
+   Requests are ordinary JSON, because a Worker answers the CORS preflight
+   properly, which Apps Script could not. */
+function contactEmail() {
+  return (window.SURVEY_CONFIG && window.SURVEY_CONFIG.email) || 'k.sharma7@newcastle.ac.uk';
+}
+function endpointBase() {
+  return ((window.SURVEY_CONFIG && window.SURVEY_CONFIG.endpoint) || '').trim().replace(/\/+$/, '');
+}
+function postJson(path, payload) {
+  const base = endpointBase();
+  if (!base) return Promise.reject(new Error('no endpoint configured'));
+  return fetch(base + path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(r => r.json());
+}
+
+function setSaveStatus(kind, html) {
+  const el = document.getElementById('save-status');
+  el.className = 'savebox ' + kind;
+  el.innerHTML = html;
+}
+
+function saveToServer() {
+  if (!endpointBase()) {
+    setSaveStatus('warn', '<b>This copy of the survey is not connected to a store.</b> ' +
+      'Please download the file below and email it to <code>' + contactEmail() +
+      '</code>, quoting reference <b>' + RID + '</b>.');
+    return;
+  }
+  setSaveStatus('busy', 'Sending your responses, one moment.');
+  postJson('/submit', { rows: state.rows.map(r => {
+      const o = {};
+      HEAD.forEach(h => { o[h] = cell(h, r); });
+      return o;
+    }) })
+    .then(j => {
+      if (!j || !j.ok) throw new Error((j && j.error) || 'rejected');
+      setSaveStatus('ok', '<b>Your responses have been received.</b> Reference <b>' + RID +
+        '</b>. Nothing further is needed.');
+    })
+    .catch(() => {
+      setSaveStatus('warn', '<b>Your responses could not be sent automatically.</b> ' +
+        'Please download the file below and email it to <code>' + contactEmail() +
+        '</code>, quoting reference <b>' + RID + '</b>.');
+    });
+}
+
+/* ================================================================ CSV */
+const HEAD = window.STUDY_SCHEMA.SURVEY_COLS;
+const IV_EXTRA = window.STUDY_SCHEMA.INTERVIEW_COLS.filter(c => c !== 'response_id');
+
+function cell(h, r) {
+  if (h in r) return r[h];
+  if (h in state.demo) return state.demo[h];
+  if (h in state.screen) return state.screen[h];
+  if (h in state.checks) return state.checks[h];
+  if (typeof ivState !== 'undefined' && h in ivState.row) return ivState.row[h];
+  if (h in state) return state[h];
+  return '';
+}
+
+/* If the participant completed the interview inline, the downloaded file uses
+   the combined column set, which is exactly the "survey plus written interview"
+   upload template. A file emailed after a failed send imports without any
+   reshaping. */
+function csvCols() {
+  const hasIv = typeof ivState !== 'undefined' &&
+    Object.keys(ivState.row).some(k => String(ivState.row[k] || '').trim() !== '');
+  return hasIv ? HEAD.concat(IV_EXTRA) : HEAD;
+}
+
+function toCsv() {
+  const cols = csvCols();
+  const esc = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+  const lines = [cols.join(',')];
+  state.rows.forEach(r => lines.push(cols.map(h => esc(cell(h, r))).join(',')));
+  return lines.join('\n');
+}
+
+function downloadCsv() {
+  const blob = new Blob([toCsv()], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `dashboard_study_${RID}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+
+/* ============================================================================
+   THE WRITTEN INTERVIEW
+
+   Runs inline, straight after the survey, for participants who agree and choose
+   to do it now. Everything is rendered from STUDY_SCHEMA so the questions,
+   ratings and consent statements have exactly one definition.
+
+   Two design points worth keeping:
+   - The survey is sent to the store BEFORE the interview begins. A participant
+     who starts the interview and abandons it still leaves a complete survey.
+   - Q10 is built from this participant's own vignette record. In the emailed
+     workbook this line has to be filled in by hand for each person, which is
+     what makes the sampling behavioural rather than convenience based. Inline,
+     it fills itself.
+   ========================================================================= */
+
+const SCH = window.STUDY_SCHEMA;
+const ivState = { row: {}, page: 0 };
+const IV_PAGES = 3;                    /* twelve questions, four to a page */
+let ivT0 = 0;
+
+/* ------------------------------------------------- Q10, from their own data */
+function buildQ10() {
+  const rows = state.rows;
+  if (!rows.length) return null;
+  /* prefer a vignette where the fault was hidden and they followed the screen,
+     then any hidden one, then anything at all */
+  const pick = rows.find(r => r.data_signal === 'hidden' && r.over_reliance === 1)
+            || rows.find(r => r.data_signal === 'hidden')
+            || rows[0];
+  const sc = SC.find(s => s.key === pick.scenario);
+  if (!sc) return null;
+  const opt = sc.options.find(o => o.k === pick.choice_key);
+  const chose = opt ? opt.t.replace(/\.$/, '') : 'the option you selected';
+  return 'In the study you have just completed, in the scenario about <b>' + sc.q10about +
+    '</b> the dashboard indicated that <b>' + sc.q10screen + '</b>, while what you knew locally was that <b>' +
+    sc.q10local + '</b>. You chose: <i>' + chose + '</i>.<br><br>' +
+    'Looking back, what would drive your choice if this were a real decision at your work?';
+}
+
+/* ------------------------------------------------------------- consent page
+   Three checkboxes, matching the survey's consent page, with a select-all. The
+   survey's own consent already covered taking part, stopping, and anonymised
+   aggregate reporting, so those are not asked a second time. No name is typed:
+   the response id is the record, and the study holds no personal data. */
+function renderIvConsent() {
+  document.getElementById('iv-consent').innerHTML = SCH.IV_CONSENT.map((t, i) =>
+    '<label class="opt"><input type="checkbox" class="ivcons" onchange="syncIvConsent()">' +
+    '<span>' + t + '</span></label>').join('');
+}
+function toggleAllIvConsent(box) {
+  document.querySelectorAll('.ivcons').forEach(c => { c.checked = box.checked; });
+  if (box.checked) document.getElementById('w-ivconsent').style.display = 'none';
+}
+function syncIvConsent() {
+  const all = [...document.querySelectorAll('.ivcons')].every(c => c.checked);
+  document.getElementById('ivcons-all').checked = all;
+}
+function checkIvConsent() {
+  const boxes = [...document.querySelectorAll('.ivcons')];
+  if (!boxes.length || !boxes.every(c => c.checked)) {
+    document.getElementById('w-ivconsent').style.display = 'block'; return;
+  }
+  document.getElementById('w-ivconsent').style.display = 'none';
+  ivState.row.consent_quotes = 'Yes';
+  ivState.row.consent_storage = 'Yes';
+  ivState.row.consent_confidential = 'Yes';
+  ivState.row.consent_date = new Date().toISOString().slice(0, 10);
+  go('s-ivabout');
+}
+
+/* --------------------------------------------------------------- about page */
+/* Only what the survey did not already ask. The survey's sector, seniority and
+   years are copied across silently so the interview columns are still filled. */
+const IV_ABOUT = [
+  ['country', 'Which country do you work in?', 'select',
+    ['India', 'United Kingdom', 'United States', 'United Arab Emirates', 'Australia', 'Canada',
+     'Germany', 'Singapore', 'Other']],
+  ['job_title', 'What is your job title?', 'text', null],
+  ['people_responsible', 'How many people are you responsible for?', 'select',
+    ['None', '1 to 4', '5 to 9', '10 to 24', '25 to 99', '100 or more']],
+  ['dashboard_frequency', 'How often do you open a dashboard or report?', 'select',
+    ['Several times a day', 'About once a day', 'A few times a week', 'About once a week', 'Less often']],
+  ['stale_warning_shown', 'Do your dashboards show a warning when the data is stale or a feed has failed?', 'select',
+    ['Yes, always', 'Yes, sometimes', 'No', 'I do not know']],
+  ['bi_training', 'Have you had formal training in data analysis or business intelligence?', 'select',
+    ['Yes, a formal qualification', 'Yes, employer training', 'Self taught', 'No']],
+  ['age_band', 'Age band (optional)', 'select',
+    ['', '18 to 24', '25 to 34', '35 to 44', '45 to 54', '55 to 64', '65 or over', 'Prefer not to say']],
+  ['qualification', 'Highest qualification completed (optional)', 'select',
+    ['', 'School', 'Undergraduate degree', 'Postgraduate degree', 'Doctorate', 'Professional qualification', 'Prefer not to say']]
+];
+const IV_ABOUT_REQUIRED = ['country', 'job_title', 'people_responsible', 'dashboard_frequency',
+                           'stale_warning_shown', 'bi_training'];
+
+function renderIvAbout() {
+  document.getElementById('iv-about').innerHTML = IV_ABOUT.map(f => {
+    if (f[2] === 'text') {
+      return '<label class="q">' + f[1] + '</label><input type="text" id="iva-' + f[0] + '">';
+    }
+    return '<label class="q">' + f[1] + '</label><select id="iva-' + f[0] + '">' +
+      f[3].map(o => '<option value="' + o + '">' + (o || 'Please choose') + '</option>').join('') +
+      '</select>';
+  }).join('');
+}
+
+function submitIvAbout() {
+  const missing = IV_ABOUT_REQUIRED.some(k => !document.getElementById('iva-' + k).value.trim());
+  if (missing) { document.getElementById('w-ivabout').style.display = 'block'; return; }
+  document.getElementById('w-ivabout').style.display = 'none';
+  IV_ABOUT.forEach(f => { ivState.row[f[0]] = document.getElementById('iva-' + f[0]).value.trim(); });
+  /* carry across what the survey already established, rather than asking twice */
+  ivState.row.iv_sector = state.demo.sector;
+  ivState.row.level = state.demo.seniority;
+  ivState.row.years_experience = state.demo.experience;
+  ivState.page = 0;
+  renderIvQuestions();
+  go('s-ivq');
+}
+
+/* ----------------------------------------------------------- question pages */
+function renderIvQuestions() {
+  const per = Math.ceil(SCH.IV_QUESTIONS.length / IV_PAGES);
+  const from = ivState.page * per, to = Math.min(from + per, SCH.IV_QUESTIONS.length);
+  document.getElementById('iv-qcount').textContent =
+    'Questions ' + (from + 1) + ' to ' + to + ' of ' + SCH.IV_QUESTIONS.length;
+
+  document.getElementById('iv-questions').innerHTML = SCH.IV_QUESTIONS.slice(from, to).map((q, k) => {
+    const n = from + k + 1;
+    const stem = q[1] === null ? (buildQ10() || 'Looking back at the study you have just completed, what would drive your choice if this were a real decision at your work?') : q[1];
+    return '<label class="q">Q' + n + '. ' + stem + '</label>' +
+           '<p class="muted">' + q[2] + '</p>' +
+           '<textarea id="ivq-' + q[0] + '"></textarea>';
+  }).join('');
+
+  /* restore anything already typed, so Back does not lose an answer */
+  SCH.IV_QUESTIONS.slice(from, to).forEach(q => {
+    const el = document.getElementById('ivq-' + q[0]);
+    if (el && ivState.row[q[0]]) el.value = ivState.row[q[0]];
+  });
+  if (ivState.page === 0) ivState.row.Q10_prompt = (buildQ10() || '').replace(/<[^>]+>/g, '');
+
+  document.getElementById('iv-back').textContent = ivState.page === 0 ? 'Back' : 'Previous questions';
+  document.getElementById('iv-next').textContent =
+    ivState.page === IV_PAGES - 1 ? 'On to the rating statements' : 'Next questions';
+}
+
+function captureIvPage() {
+  const per = Math.ceil(SCH.IV_QUESTIONS.length / IV_PAGES);
+  const from = ivState.page * per, to = Math.min(from + per, SCH.IV_QUESTIONS.length);
+  SCH.IV_QUESTIONS.slice(from, to).forEach(q => {
+    const el = document.getElementById('ivq-' + q[0]);
+    if (el) ivState.row[q[0]] = el.value.replace(/\s+$/, '');
+  });
+}
+
+function ivQuestionPage(delta) {
+  captureIvPage();
+  const next = ivState.page + delta;
+  if (next < 0) { go('s-ivabout'); return; }
+  if (next >= IV_PAGES) { renderIvRatings(); go('s-ivrate'); return; }
+  ivState.page = next;
+  renderIvQuestions();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function ivBackToQuestions() { ivState.page = IV_PAGES - 1; renderIvQuestions(); go('s-ivq'); }
+
+/* ----------------------------------------------------------- rating page */
+function renderIvRatings() {
+  document.getElementById('iv-ratings').innerHTML = SCH.RATINGS.map((r, i) =>
+    '<label class="q">' + r[0] + '. ' + r[1] + '</label><div class="scale" id="ivr-' + r[0] + '"></div>').join('');
+  SCH.RATINGS.forEach(r => scale('ivr-' + r[0], 'iv' + r[0], 'Strongly disagree', 'Strongly agree', 7));
+  SCH.RATINGS.forEach(r => {
+    if (ivState.row[r[0]]) {
+      const el = document.querySelector('input[name="iv' + r[0] + '"][value="' + ivState.row[r[0]] + '"]');
+      if (el) el.checked = true;
+    }
+  });
+}
+
+/* --------------------------------------------------------------- submitting */
+function finishInterview() {
+  SCH.RATINGS.forEach(r => { ivState.row[r[0]] = picked('iv' + r[0]) || ''; });
+  ivState.row.response_id = RID;
+  ivState.row.interview_mode = 'now';
+  ivState.row.submitted_at = new Date().toISOString();
+  ivState.row.iv_total_seconds = ivT0 ? Math.round((Date.now() - ivT0) / 1000) : '';
+
+  /* rebuild the downloadable file now that the interview columns exist, so the
+     fallback copy matches the combined upload template */
+  document.getElementById('out').value = toCsv();
+  go('s-end');
+  postJson('/interview', { row: ivState.row })
+    .then(j => {
+      if (!j || !j.ok) throw new Error('rejected');
+      setSaveStatus('ok', '<b>Your survey answers and your written interview have both been received.</b> ' +
+        'Reference <b>' + RID + '</b>. Nothing further is needed, and thank you for the extra time.');
+    })
+    .catch(() => {
+      setSaveStatus('warn', '<b>Your survey answers were recorded, but the written interview could not be sent.</b> ' +
+        'Please download the file below and email it to <code>' + contactEmail() + '</code>, quoting reference <b>' + RID + '</b>.');
+    });
+}
+
+function startInterview() {
+  ivT0 = Date.now();
+  renderIvConsent();
+  renderIvAbout();
+  go('s-ivintro');
+}
+go('s-info');
+</script>
+</body>
+</html>
